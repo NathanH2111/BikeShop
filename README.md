@@ -1,18 +1,18 @@
 # BikeShop
-Summary (Purpose): 
+## Summary (Purpose): 
 
 A website for users to purchase both custom and prebuilt bikes. Managers can log in to add and remove the bikes available to users.  
 
-Goals:  
+## Goals:  
 
  
 
-Functional Requirements: 
+## Functional Requirements: 
 
  
 
-Non-functional Requirements: 
+## Non-functional Requirements: 
 
  
 
-Conclusion (includes time frame to finish project): 
+## Conclusion (includes time frame to finish project): 
