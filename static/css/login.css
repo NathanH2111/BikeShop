@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap');
+        *
+        {
+            font-family: 'Balsamiq Sans', cursive;
+        }
+        .hero
+    {
+        border-radius: 25px;
+        width:200px;
+        height:50px;
+        text-align: center;
+    }
+    button
+    {
+        width:200px;
+        height:50px;
+    }
+    .general
+    {
+        border: 5px solid black;
+        border-radius: 25px;
+        width:750px;
+        height:500px;
+        background-color: aqua;
+    }
+
+    

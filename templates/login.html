@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+
+<header>
+ <link rel="stylesheet" href="{{url_for('static',filename='css/login.css')}}"
+
+</header>
+<body>
+<center>
+    <div class="general">
+    <h1>Login</h1>
+        <form class = form1 action = "http://localhost:5000/login" method = "POST">
+            <label for="RUsername">EMAIL: </label>
+            <br/>
+            <input type="text" id="Username" name ='nm'>
+            <br/>
+        <label for="Password">PASSWORD: </label>
+        <br/>
+        <input type="text" id="Password" name = 'pw'>
+        <br/>
+        <br/>
+        <button type="submit" value="submit">Login</button>
+        <p>{{error}}</p>
+        <a href="http://localhost:5000/main">Need to register? click here</a>
+    </div>
+
+<center>
+
+    </form>
+</body>
+
+
+</html>

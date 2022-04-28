@@ -1,4 +1,6 @@
 from flask import *
+import bcrypt
+import data 
 
 app = Flask(__name__)
 
