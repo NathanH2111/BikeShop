@@ -70,7 +70,7 @@ def register_register():
 
         if not check:
             newpass = bcrypt.hashpw(password.encode('utf-8'),bcrypt.gensalt(10))
-            curr.execute("INSERT INTO users (name,email,phone,userrank,password) VALUES(%s,%s,%s)",(f"{userName}",f"{userAddress}",f"U",newpass))
+            curr.execute("INSERT INTO users (email,role,password) VALUES(%s,%s,%s)",(f"{userName}",f"{userAddress}",f"U",newpass))
             conn.commit()
             cur.close()
             conn.close()
