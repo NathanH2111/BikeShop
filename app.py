@@ -6,7 +6,7 @@ app = Flask(__name__)
 con = data.connect()
 cur = con.cursor()
 
-cur.execute('CREATE TABLE IF NOT EXISTS users (id BIGSERIAL PRIMARY KEY NOT NULL, email text NOT NULL, password BYTEA,role VARCHAR(5))')
+cur.execute('CREATE TABLE IF NOT EXISTS users (id BIGSERIAL PRIMARY KEY NOT NULL, email text NOT NULL,address BYTEA, password BYTEA,role VARCHAR(5))')
 con.commit()
 cur.execute('CREATE TABLE IF NOT EXISTS bikeStock (name TEXT,type TEXT,price DOUBLE PRECISION,image text,description TEXT)')
 cur.execute('CREATE TABLE IF NOT EXISTS bikesold (name TEXT,type TEXT,price DOUBLE PRECISION,image TEXT,description TEXT,customer BIGINT,FOREIGN KEY(customer) REFERENCES users(id))')
@@ -51,33 +51,33 @@ def loginFunc():
 
 @app.route("/register")
 def renderRegister():
-   return render_template('register.html')
+   return render_template('register.html',error = '')
 
 @app.route('/register',methods=['POST','GET'])
 def register_register():
-    if request.method == 'POST':
-        userName = request.form.get('eml')
-        userAddress = request.form.get('adr')
-        password = request.form.get('pwd')
-        conn = data.connect()
-        curr = conn.cursor()
-        curr.execute('SELECT email from users WHERE email = %s',(f"{userName}",))
-        check = curr.fetchall()
+   if request.method == 'POST':
+      userName = request.form.get('eml')
+      userAddress = request.form.get('adr')
+      password = request.form.get('pwd')
+      conn = data.connect()
+      curr = conn.cursor()
+      curr.execute('SELECT email from users WHERE email = %s',(f"{userName}",))
+      check = curr.fetchall()
 
-        print(check)
+      print(check)
 
-        if password == None:return render_template('Register.html',error=' please input a password')
+      if password == None:return render_template('Register.html',error=' please input a password')
 
-        if not check:
-            newpass = bcrypt.hashpw(password.encode('utf-8'),bcrypt.gensalt(10))
-            curr.execute("INSERT INTO users (email,role,password) VALUES(%s,%s,%s)",(f"{userName}",f"{userAddress}",f"U",newpass))
-            conn.commit()
-            cur.close()
-            conn.close()
-            return redirect(url_for('login'))
+      if not check:
+         newpass = bcrypt.hashpw(password.encode('utf-8'),bcrypt.gensalt(10))
+         curr.execute("INSERT INTO users (email,address,role,password) VALUES(%s,%s,%s,%s)",(f"{userName}",data.encrypt_text(userAddress),f"U",newpass))
+         conn.commit()
+         cur.close()
+         conn.close()
+         return redirect(url_for('renderLogin'))
 
-        else:
-            return render_template('register.html',error ='User already Exists')
+      else:
+         return render_template('register.html',error ='User already Exists')
 
 @app.route("/shop")
 def renderShop():
