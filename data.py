@@ -20,3 +20,5 @@ def decrypt_text(encrypted_text):
     f = Fernet(key)
     decoded = f.decrypt(encrypted_text)
     return decoded.decode("utf-8")
+
+print(encrypt_text('3 appple lane'))
