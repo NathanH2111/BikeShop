@@ -1,32 +1,29 @@
 <!DOCTYPE HTML>
 
-<header>
- <link rel="stylesheet" href="{{url_for('static',filename='css/login.css')}}"
+<head>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/login.css')}}">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
-</header>
+</head>
 <body>
-<center>
-    <div class="general">
-    <h1>Login</h1>
+    <section>
+        <div class="general">
+        <h1>Login</h1>
         <form class = form1 action = "http://localhost:5000/login" method = "POST">
             <label for="RUsername">EMAIL: </label>
             <br/>
             <input type="emmail" id="Username" name ='nm'>
             <br/>
-        <label for="Password">PASSWORD: </label>
-        <br/>
-        <input type="password" id="Password" name = 'pw'>
-        <br/>
-        <br/>
-        <button type="submit" value="submit">Login</button>
-        <p>{{error}}</p>
-        <a href="http://localhost:5000/register">Need to register? click here</a>
-    </div>
-
-<center>
-
-    </form>
+            <label for="Password">PASSWORD: </label>
+            <br/>
+            <input type="password" id="Password" name = 'pw'>
+            <br/>
+            <br/>
+            <button type="submit" value="submit">Login</button>
+            <p>{{error}}</p>
+            <a href="http://localhost:5000/register">Need to register? click here</a>
+            </form>
+        </div>
+    </section>
 </body>
-
-
 </html>
