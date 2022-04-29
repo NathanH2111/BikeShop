@@ -40,7 +40,7 @@ def mngrAuth():
    print(users)
    tempPass = bytes(users[0][2])
    print(tempPass)
-   if bcrypt.checkpw(password,tempPass):
+   if bcrypt.checkpw(password,tempPass) and users[0][1] == 'A':
       curr.execute("INSERT INTO users (email,address,role,password) VALUES(%s,%s,%s,%s)",(tempData[0],tempData[1],'A',tempData[2]))
       return render_template('Login.html')
 
