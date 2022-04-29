@@ -83,5 +83,9 @@ def register_register():
 def renderShop():
    return render_template('shop.html')
 
+@app.route("/admin")
+def renderAdmin():
+   return render_template('admin.html')
+
 if __name__ == '__main__':
    app.run(debug=True)
