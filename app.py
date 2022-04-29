@@ -5,7 +5,8 @@ import data
 app = Flask(__name__)
 con = data.connect()
 cur = con.cursor()
-
+global tempData
+tempData =[]
 cur.execute('CREATE TABLE IF NOT EXISTS users (id BIGSERIAL PRIMARY KEY NOT NULL, email text NOT NULL,address BYTEA, password BYTEA,role VARCHAR(5))')
 con.commit()
 cur.execute('CREATE TABLE IF NOT EXISTS bikeStock (name TEXT,type TEXT,price DOUBLE PRECISION,image text,description TEXT)')
@@ -21,6 +22,30 @@ def renderIndex():
 @app.route("/login")
 def renderLogin():
    return render_template('login.html',error = '')
+
+@app.route("/login",methods =['POST','GET'])
+def mngrAuth():
+   userName = request.form.get('nm')
+   password = request.form.get('pw')
+   password = password.encode('utf-8')
+
+   conn = data.connect()
+   curr = conn.cursor()
+   curr.execute("SELECT email,role, password,id FROM users WHERE email = %s",(f"{userName}",))
+   users = curr.fetchall()
+   curr.close()
+   conn.close()
+   if not users:
+      return render_template('Login.html',error='Incorrect Username or Password')
+   print(users)
+   tempPass = bytes(users[0][2])
+   print(tempPass)
+   if bcrypt.checkpw(password,tempPass) and users[0][1] == 'A':
+      curr.execute("INSERT INTO users (email,address,role,password) VALUES(%s,%s,%s,%s)",(tempData[0],tempData[1],'A',tempData[2]))
+      return render_template('Login.html')
+
+   else:
+      return redirect(url_for('renderRegister',error='Invalid code'))
 
 @app.route('/login',methods = ['POST','GET'])
 def loginFunc():
@@ -59,6 +84,7 @@ def register_register():
       userName = request.form.get('eml')
       userAddress = request.form.get('adr')
       password = request.form.get('pwd')
+      mgr = request.form.get('mngr')
       conn = data.connect()
       curr = conn.cursor()
       curr.execute('SELECT email from users WHERE email = %s',(f"{userName}",))
@@ -69,6 +95,9 @@ def register_register():
       if password == None:return render_template('Register.html',error=' please input a password')
 
       if not check:
+         if mgr == '1':
+            global tempData
+            tempData = [userName,data.encrypt_text(userAddress),bcrypt.hashpw(password.encode('utf-8'),bcrypt.gensalt(10))]
          newpass = bcrypt.hashpw(password.encode('utf-8'),bcrypt.gensalt(10))
          curr.execute("INSERT INTO users (email,address,role,password) VALUES(%s,%s,%s,%s)",(f"{userName}",data.encrypt_text(userAddress),f"U",newpass))
          conn.commit()
