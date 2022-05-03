@@ -9,6 +9,9 @@ global tempData
 tempData =[]
 cur.execute('CREATE TABLE IF NOT EXISTS users (id BIGSERIAL PRIMARY KEY NOT NULL, email text NOT NULL,address BYTEA, password BYTEA,role VARCHAR(5))')
 con.commit()
+pw = 'abc123'
+pw = pw.encode('utf-8')
+cur.execute('INSERT INTO users (email, address, password, role) VALUES(%s,%s,%s,%s) ON CONFLICT DO NOTHING;',('gmdombach211@stevenscollege.edu','4 spite rode',bcrypt.hashpw(pw,bcrypt.gensalt(10)),'A'))
 cur.execute('CREATE TABLE IF NOT EXISTS bikeStock (name TEXT,type TEXT,price DOUBLE PRECISION,image text,description TEXT)')
 cur.execute('CREATE TABLE IF NOT EXISTS bikesold (name TEXT,type TEXT,price DOUBLE PRECISION,image TEXT,description TEXT,customer BIGINT,FOREIGN KEY(customer) REFERENCES users(id))')
 con.commit()
@@ -41,7 +44,12 @@ def mngrAuth():
    tempPass = bytes(users[0][2])
    print(tempPass)
    if bcrypt.checkpw(password,tempPass) and users[0][1] == 'A':
+      con = data.connect()
+      curr = con.cursor()
       curr.execute("INSERT INTO users (email,address,role,password) VALUES(%s,%s,%s,%s)",(tempData[0],tempData[1],'A',tempData[2]))
+      con.commit()
+      curr.close()
+      con.close()
       return render_template('Login.html')
 
    else:
@@ -98,6 +106,8 @@ def register_register():
          if mgr == '1':
             global tempData
             tempData = [userName,data.encrypt_text(userAddress),bcrypt.hashpw(password.encode('utf-8'),bcrypt.gensalt(10))]
+            return redirect(url_for('renderLogin',error = 'Please enter administrator credentials'))
+
          newpass = bcrypt.hashpw(password.encode('utf-8'),bcrypt.gensalt(10))
          curr.execute("INSERT INTO users (email,address,role,password) VALUES(%s,%s,%s,%s)",(f"{userName}",data.encrypt_text(userAddress),f"U",newpass))
          conn.commit()
