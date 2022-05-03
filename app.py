@@ -1,5 +1,6 @@
 from flask import *
 import bcrypt
+import re
 import data 
 
 app = Flask(__name__)
@@ -7,7 +8,7 @@ con = data.connect()
 cur = con.cursor()
 global tempData
 tempData =[]
-cur.execute('CREATE TABLE IF NOT EXISTS users (id BIGSERIAL PRIMARY KEY NOT NULL, email text NOT NULL,address BYTEA, password BYTEA,role VARCHAR(5))')
+cur.execute('CREATE TABLE IF NOT EXISTS users (id BIGSERIAL PRIMARY KEY NOT NULL, email text UNIQUE NOT NULL,address BYTEA, password BYTEA,role VARCHAR(5))')
 con.commit()
 pw = 'abc123'
 pw = pw.encode('utf-8')
@@ -22,9 +23,14 @@ con.close()
 def renderIndex():
    return render_template('index.html')
 
+@app.route('/login')
+def adminLogin():
+   return render_template('login.html',error = 'please enter admin credentials')
+
 @app.route("/login")
 def renderLogin():
    return render_template('login.html',error = '')
+   
 
 @app.route("/login",methods =['POST','GET'])
 def mngrAuth():
@@ -103,10 +109,12 @@ def register_register():
       if password == None:return render_template('Register.html',error=' please input a password')
 
       if not check:
+         if re.match('(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$',password):
+            return render_template('register.html',error='Passwords must contaion one uppercase one lowercase one number and one symbol \n passwords must be at least 8 characters long')
          if mgr == '1':
             global tempData
             tempData = [userName,data.encrypt_text(userAddress),bcrypt.hashpw(password.encode('utf-8'),bcrypt.gensalt(10))]
-            return redirect(url_for('renderLogin',error = 'Please enter administrator credentials'))
+            return redirect(url_for('adminLogin'))
 
          newpass = bcrypt.hashpw(password.encode('utf-8'),bcrypt.gensalt(10))
          curr.execute("INSERT INTO users (email,address,role,password) VALUES(%s,%s,%s,%s)",(f"{userName}",data.encrypt_text(userAddress),f"U",newpass))

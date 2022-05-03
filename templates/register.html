@@ -4,20 +4,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.2.0/zxcvbn.js"></script>
     <link rel="stylesheet" href="../static/css/register.css">
     <link rel="stylesheet" href="{{url_for('static',filename='css/register.css')}}">
     <title>Document</title>
 </head>
 <body>
     <form method="post" action="http://localhost:5000/register">
-      
         <input type="email" name="eml" placeholder="Enter your email address">
         <br/>
         <input type="'text" name="adr" placeholder="Enter your shipping address">
         <br/>
-        <input type="password" name = pwd placeholder="Enter your password">
+        <input type="password" id = password name = pwd placeholder="Enter your password" required>
+        <meter max="4" id="password-strength-meter"></meter>
+        <p id = "password-strength-text"></p>
+
         <br/>
-        <input type="checkbox" name="mngr" value="1" placeholder="Register as Administrator ?">
+        <label for ='checker'>Manager?</label>
+        <input id ='checker' type="checkbox" name="mngr" value="1" placeholder="Register as Administrator ?">
         <br/>
         <button type="submit" value="'submit">Register</button>
         <h3>{{error}}</h3>
@@ -25,6 +29,32 @@
     </form>
   
 
-    
+    <script>
+        var strength = {
+        0: "Worst",
+        1: "Bad",
+        2: "Weak",
+        3: "Good",
+        4: "Strong"
+}
+var password = document.getElementById('password');
+var meter = document.getElementById('password-strength-meter');
+var text = document.getElementById('password-strength-text');
+
+password.addEventListener('input', function() {
+  var val = password.value;
+  var result = zxcvbn(val);
+  console.log(result.score);
+  // Update the password strength meter
+  meter.value = result.score;
+  console.log(meter.value);
+  // Update the text indicator
+  if (val !== "") {
+    text.innerHTML = "Strength: " + strength[result.score]; 
+  } else {
+    text.innerHTML = "";
+  }
+});
+    </script>
 </body>
 </html>
