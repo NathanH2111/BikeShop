@@ -16,12 +16,12 @@
         <input type="'text" name="adr" placeholder="Enter your shipping address">
         <br/>
         <input type="password" id = password name = pwd placeholder="Enter your password" required>
-        <meter max="4" id="password-strength-meter"></meter>
+        <meter min = 1 max="4" id="password-strength-meter"></meter>
         <p id = "password-strength-text"></p>
 
         <br/>
-        <label for ='checker'>Manager?</label>
-        <input id ='checker' type="checkbox" name="mngr" value="1" placeholder="Register as Administrator ?">
+        <label for ='regManager'>Manager?</label>
+        <input id ='regManager' type="checkbox" name="mngr" value="1" placeholder="Register as Administrator ?">
         <br/>
         <button type="submit" value="'submit">Register</button>
         <h3>{{error}}</h3>
@@ -44,13 +44,13 @@ var text = document.getElementById('password-strength-text');
 password.addEventListener('input', function() {
   var val = password.value;
   var result = zxcvbn(val);
-  console.log(result.score);
   // Update the password strength meter
   meter.value = result.score;
   console.log(meter.value);
   // Update the text indicator
   if (val !== "") {
-    text.innerHTML = "Strength: " + strength[result.score]; 
+    text.innerHTML = "Strength: " + strength[result.score];
+
   } else {
     text.innerHTML = "";
   }

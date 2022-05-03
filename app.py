@@ -19,20 +19,16 @@ con.commit()
 cur.close() 
 con.close()
 
+@app.route('/administrator')
+def admin():return render_template('admin.html')
+
 @app.route("/")
-def renderIndex():
-   return render_template('index.html')
+def renderIndex():return render_template('index.html')
 
-@app.route('/login')
-def adminLogin():
-   return render_template('login.html',error = 'please enter admin credentials')
+@app.route('/login/administrator')
+def adminLogin():return render_template('login.html',error = 'please enter admin credentials')
 
-@app.route("/login")
-def renderLogin():
-   return render_template('login.html',error = '')
-   
-
-@app.route("/login",methods =['POST','GET'])
+@app.route("/login/administrator",methods =['POST','GET'])
 def mngrAuth():
    userName = request.form.get('nm')
    password = request.form.get('pw')
@@ -44,11 +40,13 @@ def mngrAuth():
    users = curr.fetchall()
    curr.close()
    conn.close()
-   if not users:
-      return render_template('Login.html',error='Incorrect Username or Password')
+
+   if not users:return render_template('Login.html',error='Incorrect Username or Password')
+
    print(users)
    tempPass = bytes(users[0][2])
    print(tempPass)
+   
    if bcrypt.checkpw(password,tempPass) and users[0][1] == 'A':
       con = data.connect()
       curr = con.cursor()
@@ -56,11 +54,16 @@ def mngrAuth():
       con.commit()
       curr.close()
       con.close()
-      return render_template('Login.html')
+      userName = ''
+      password = ''
+      
+      return redirect(url_for('renderLogin'))
 
-   else:
-      return redirect(url_for('renderRegister',error='Invalid code'))
+   else:return redirect(url_for('renderRegister',error='Invalid code'))
 
+@app.route("/login")
+def renderLogin():return render_template('login.html',error = '')
+   
 @app.route('/login',methods = ['POST','GET'])
 def loginFunc():
    userName = request.form.get('nm')
@@ -73,24 +76,21 @@ def loginFunc():
    users = curr.fetchall()
    curr.close()
    conn.close()
-   if not users:
-      return render_template('Login.html',error='Incorrect Username or Password')
+   if not users:return render_template('Login.html',error='Incorrect Username or Password')
+
    print(users)
    tempPass = bytes(users[0][2])
    print(tempPass)
    if bcrypt.checkpw(password,tempPass):
-      if users[0][1] == 'A':
-         return redirect(url_for('admin'))
-      if users[0][1] == 'U':
-         return redirect(url_for('renderShop',idcode = users[0][3]))
+      if users[0][1] == 'A':return redirect(url_for('admin'))
+
+      if users[0][1] == 'U':return redirect(url_for('renderShop',idcode = users[0][3]))
       return render_template('Login.html',error=' oops! An error occured please try to log in again in a few minutes')
-   else:
-      return render_template('Login.html',error='Incorrect Username or Password')
+   else:return render_template('Login.html',error='Incorrect Username or Password')
 
 
 @app.route("/register")
-def renderRegister():
-   return render_template('register.html',error = '')
+def renderRegister():return render_template('register.html',error = '')
 
 @app.route('/register',methods=['POST','GET'])
 def register_register():
@@ -109,8 +109,7 @@ def register_register():
       if password == None:return render_template('Register.html',error=' please input a password')
 
       if not check:
-         if re.match('(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$',password):
-            return render_template('register.html',error='Passwords must contaion one uppercase one lowercase one number and one symbol \n passwords must be at least 8 characters long')
+         if re.match('(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$',password):return render_template('register.html',error='Passwords must contaion one uppercase one lowercase one number and one symbol \n passwords must be at least 8 characters long')
          if mgr == '1':
             global tempData
             tempData = [userName,data.encrypt_text(userAddress),bcrypt.hashpw(password.encode('utf-8'),bcrypt.gensalt(10))]
@@ -123,12 +122,10 @@ def register_register():
          conn.close()
          return redirect(url_for('renderLogin'))
 
-      else:
-         return render_template('register.html',error ='User already Exists')
+      else:return render_template('register.html',error ='User already Exists')
 
 @app.route("/shop")
 def renderShop():
    return render_template('shop.html')
 
-if __name__ == '__main__':
-   app.run(debug=True)
+if __name__ == '__main__':app.run(debug=True)

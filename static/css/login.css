@@ -2,6 +2,14 @@
         *
         {
             font-family: 'Balsamiq Sans', cursive;
+            margin:0;
+            padding:0;
+            box-sizing: border-box;
+        }
+        body{
+            font-size:xx-large;
+            width:100%;
+            height:80vh;
         }
         .hero
     {
@@ -10,6 +18,13 @@
         height:50px;
         text-align: center;
     }
+    form{
+        margin:auto;
+    }
+    input{
+        width:80%;
+        height:5vh;
+    }
     button
     {
         width:200px;
@@ -17,11 +32,15 @@
     }
     .general
     {
+        margin:auto;
+        margin-top:5vh;
         border: 5px solid black;
         border-radius: 25px;
         width:750px;
         height:500px;
         background-color: aqua;
+        display:flex;
+        flex-direction: column;
+        justify-content: space-around;
+        text-align: center;
     }
-
-    
