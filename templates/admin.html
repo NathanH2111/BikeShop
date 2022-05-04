@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="{{url_for('static',filename='css/admin.css')}}"
+    <title>Administrator</title>
+</head>
+<body>
+    <header>
+        <a href="http://localhost:5000/login">Log Out</a>
+        <h1>Administrator pages</h1>
+    </header>
+    <section id =bike_list>
+        <ul id = bikes>
+            {%for bike in bikes %}
+            <li><img src="static/uploads/{{bike[3]}}"> {{bike[0]}}<br/>{{bike[2]}}</li>
+            {%endfor%}
+        </ul>
+    </section>
+    <section class = upload>
+        <form class = newbikes enctype=multipart/form-data action = 'http://localhost:5000/administrator' method = 'POST'>
+            <input type = text name = name placeholder ='Input bike name'>
+            <br/>
+            <select name = type>
+                <option value ='Mountain'>Mountain</option>
+                <option value = 'Street'>Street</option>
+            </select>
+            <input type="text" name = price = price placeholder =price>
+            <br/>
+            <input type="text" name ='description' placeholder ='Description'>
+            <input type = file name = 'file' placeholder ='inser file here'>
+            <input type="submit" value ='Submit'>
+        </form>
+    </section>
+    
+</body>
+</html>

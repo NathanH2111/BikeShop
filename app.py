@@ -1,9 +1,23 @@
 from flask import *
+import os
 import bcrypt
-import re
-import data 
+from app import app
+import urllib.request
 
+import re
+import data
+from werkzeug.utils import secure_filename
+
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
+
+def allowed_file(filename):
+	return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+UPLOAD_FOLDER = 'static/uploads/'
+app.secret_key = "secret key"
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 102
 con = data.connect()
 cur = con.cursor()
 global tempData
@@ -20,7 +34,39 @@ cur.close()
 con.close()
 
 @app.route('/administrator')
-def admin():return render_template('admin.html')
+def admin():
+   con = data.connect()
+   cur = con.cursor()
+   cur.execute('SELECT * FROM bikestock')
+   dat = cur.fetchall()
+   return render_template('admin.html',bikes = dat )
+
+@app.route('/administrator',methods=['POST','GET'])
+def addbikes():
+   name = request.form.get('name')
+   type = request.form.get('type')
+   desc = request.form.get('description')
+   price = float(request.form.get('price'))
+   if 'file' not in request.files:
+      return render_template('admin.html')
+   file = request.files['file']
+   if file.filename == '':
+      return render_template('admin.html')
+   if file and allowed_file(file.filename):
+      print(file.filename)
+      filename = secure_filename(file.filename)
+      file.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
+      print('upload_image filename: ' + filename)
+      con = data.connect()
+      cur = con.cursor()
+      cur.execute('INSERT INTO  bikestock (name,type,price,image,description) VALUES(%s,%s,%s,%s,%s)',(f'{name}',f'{type}',f'{price}',f'{filename}',f'{desc}'))
+      con.commit()
+      cur.close() 
+      con.close()
+      return redirect(url_for('admin'))
+   else: 
+      return redirect(url_for('admin'))
+
 
 @app.route("/")
 def renderIndex():return render_template('index.html')
