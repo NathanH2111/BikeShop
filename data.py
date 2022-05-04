@@ -1,10 +1,10 @@
 from cryptography.fernet import Fernet
 import psycopg2
 def connect(): return psycopg2.connect(
-     database = 'flask_db',
-            user = 'postgres',
-            password = 'gabe1972',
-            host = 'localhost'
+    database = 'analysis',
+    # user = 'postgres',
+    password = 'password',
+    host = 'localhost'
 )
 
 def load_key():
