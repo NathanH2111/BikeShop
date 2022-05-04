@@ -1,7 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap');
         *
         {
-            font-family: 'Balsamiq Sans', cursive;
+            font-family: Sans-Serif;
             margin:0;
             padding:0;
             box-sizing: border-box;
@@ -11,13 +10,13 @@
             width:100%;
             height:80vh;
         }
-        .hero
+        /* .hero
     {
         border-radius: 25px;
         width:200px;
         height:50px;
         text-align: center;
-    }
+    } */
     form{
         margin:auto;
     }
@@ -27,8 +26,8 @@
     }
     button
     {
-        width:200px;
-        height:50px;
+        width:60%;
+        height:8vh;
     }
     .general
     {
@@ -36,8 +35,8 @@
         margin-top:5vh;
         border: 5px solid black;
         border-radius: 25px;
-        width:750px;
-        height:500px;
+        width:50vw;
+        height:70vh;
         background-color: aqua;
         display:flex;
         flex-direction: column;
