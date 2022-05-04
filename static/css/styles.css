@@ -1,0 +1,145 @@
+* {
+   padding: 0;
+   margin: 0;
+   font-family: Sans-Serif;
+}
+
+body {
+   font-size: 100%;
+   background-color: #F5F5F5;
+}
+
+/* *Navbar Styling */
+
+#navbar-logo {
+   width: 3vw;
+}
+
+#middle-navbar {
+   width: 10%;
+   display: flex;
+   justify-content: space-around;
+}
+
+#right-navbar {
+   width: 10%;
+   display: flex;
+   justify-content: space-around;
+   
+}
+
+#navbar-container {
+   background-color: #FFFFFF;
+   width: 100%;
+   display: flex;
+   align-items: center;
+}
+
+.navbar-item {
+   color: #000000;
+   float: left;
+   text-decoration: none;
+} 
+
+/* *End Navbar Styling */
+
+/* *Hero Styling */
+
+#hero{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   /* width: 80vw;
+   height: 80vh; */
+   /* background-image: url("images/bikerideincity.jpg");
+   background-size: contain;
+   background-repeat: no-repeat; */
+   margin: 3vw;
+}
+
+#hero-container {
+   width: 80vw;
+   height: 80vh;
+   background-image: url("images/bikerideincity.jpg");
+   background-size: cover;
+   background-repeat: no-repeat;
+   text-align: center;
+}
+
+#hero-fade {
+   width: 100%;
+   height: 100%;
+   background: rgba(84, 84, 84, 0.8);
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+}
+
+#hero-text-one {
+   color: #FFF;
+   font: bold 3vw sans-serif;
+}
+
+#hero-text-two {
+   color: #FFF;
+   font: bold 1vw sans-serif;
+}
+
+/* *End Hero Styling */
+
+/* *Content Styling */
+
+#bike-types {
+   display: flex;
+   justify-content: center;
+   margin-bottom: 3vw;
+}
+
+#content-container {
+   width: 80vw;
+   display: flex;
+   justify-content: space-around;
+}
+
+.bike-styles {
+   display: flex;
+   width: 40vw;
+   justify-content: space-around;
+}
+
+.bike-type-content {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   text-align: center;
+}
+
+#content-devider {
+   height: 50vh;
+}
+
+.bike-type-content p  {
+   width: 15vw;
+}
+
+.home-images {
+   width: 15vw;
+   height: auto;
+}
+
+/* *End Content Styling */
+
+/* *Footer Styling */
+
+#footer {
+   background-color: #FFF;
+   display: flex;
+   justify-content: center;
+   padding: 2vw;
+}
+
+.footer-link {
+   color: #000000;
+   text-decoration: none;
+} 
