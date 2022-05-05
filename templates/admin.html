@@ -9,13 +9,14 @@
 </head>
 <body>
     <header>
-        <a href="http://localhost:5000/login">Log Out</a>
         <h1>Administrator pages</h1>
+        <a href="http://localhost:5000/login">Log Out</a>
+       
     </header>
     <section id =bike_list>
         <ul id = bikes>
             {%for bike in bikes %}
-            <li><img src="static/uploads/{{bike[3]}}"> {{bike[0]}}<br/>$ {{bike[2]}}<br/></li>
+            <li><img src="static/uploads/{{bike[3]}}"><br/><div>{{bike[0]}}<br/> Price: $ {{bike[2]}}<br/></div></li>
             {%endfor%}
         </ul>
     </section>
@@ -30,8 +31,8 @@
             <input type="text" name = price = price placeholder =price>
             <br/>
             <input type="text" name ='description' placeholder ='Description'>
-            <input type = file name = 'file' placeholder ='inser file here'>
-            <input type="submit" name = add value ='Submit'>
+            <input type = file name = 'file'>
+            <input type="submit" name = add value ='ADD BIKE'>
         </form>
     </section>
     <br/>
@@ -43,7 +44,7 @@
             <option value ="{{bike[0]}}">{{bike[0]}}</option>
         {% endfor %}
         </select> 
-        <input type="submit" name="delete" value="Submit">Delete</input>
+        <input type="submit" name="delete" value="DELETE BIKE"></input>
         </form>
     </section>
     

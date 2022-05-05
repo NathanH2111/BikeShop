@@ -2,8 +2,6 @@ from flask import *
 import os
 import bcrypt
 from app import app
-import urllib.request
-
 import re
 import data
 from werkzeug.utils import secure_filename
@@ -66,8 +64,10 @@ def addBikes():
          cur.close() 
          con.close()
          return redirect(url_for('admin'))
+         
       else: 
          return redirect(url_for('admin'))
+
    if 'delete' in request.form:
       con = data.connect() 
       cur = con.cursor()
@@ -78,8 +78,10 @@ def addBikes():
       cur.close()
       con.close()
       return redirect(url_for('admin'))
+
    print('Error')
    return redirect(url_for('admin'))
+
 @app.route("/")
 def renderIndex():return render_template('index.html')
 
