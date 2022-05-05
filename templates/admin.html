@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link type="text/css" rel="stylesheet" href="{{url_for('static',filename='css/admin.css')}}"
+    <link type="text/css" rel="stylesheet" href="{{url_for('static',filename='css/admin.css')}}">
     <title>Administrator</title>
 </head>
 <body>
@@ -15,12 +15,12 @@
     <section id =bike_list>
         <ul id = bikes>
             {%for bike in bikes %}
-            <li><img src="static/uploads/{{bike[3]}}"> {{bike[0]}}<br/>{{bike[2]}}</li>
+            <li><img src="static/uploads/{{bike[3]}}"> {{bike[0]}}<br/>$ {{bike[2]}}<br/></li>
             {%endfor%}
         </ul>
     </section>
     <section class = upload>
-        <form class = newbikes enctype=multipart/form-data action = 'http://localhost:5000/administrator' method = 'POST'>
+        <form class = newbikes enctype=multipart/form-data action = "{{url_for('addBikes')}}" method = 'POST'>
             <input type = text name = name placeholder ='Input bike name'>
             <br/>
             <select name = type>
@@ -31,7 +31,19 @@
             <br/>
             <input type="text" name ='description' placeholder ='Description'>
             <input type = file name = 'file' placeholder ='inser file here'>
-            <input type="submit" value ='Submit'>
+            <input type="submit" name = add value ='Submit'>
+        </form>
+    </section>
+    <br/>
+    <br/>
+    <section class = delete >
+        <form name = 'delete' action="{{url_for('addBikes')}}" class = 'delete' method = 'POST'>
+        <select name = bikes>
+        {%for bike in bikes%}
+            <option value ="{{bike[0]}}">{{bike[0]}}</option>
+        {% endfor %}
+        </select> 
+        <input type="submit" name="delete" value="Submit">Delete</input>
         </form>
     </section>
     
