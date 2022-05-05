@@ -1,9 +1,9 @@
 from cryptography.fernet import Fernet
 import psycopg2
 def connect(): return psycopg2.connect(
-    database = 'analysis',
-    # user = 'postgres',
-    password = 'password',
+    database = 'flask_db',
+    user = 'postgres',
+    password = 'gabe1972',
     host = 'localhost'
 )
 
