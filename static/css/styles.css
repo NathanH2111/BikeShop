@@ -7,9 +7,16 @@
 body {
    font-size: 100%;
    background-color: #F5F5F5;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
 }
 
 /* *Navbar Styling */
+
+navbar {
+   width: 100%;
+}
 
 #navbar-logo {
    width: 3vw;
@@ -43,18 +50,42 @@ body {
 
 /* *End Navbar Styling */
 
+/* *Description Styling */
+
+#home-description {
+   text-align: center;
+   width: 50vw;
+   margin-bottom: 5vw;
+}
+
+#desc-content { 
+   margin-bottom: 3vw;
+}
+
+#home-shop-btn {
+   color: #FFF;
+   background-color: black;
+   text-decoration: none;
+   border: 2px solid black;
+   border-radius: 10px;
+   font: bold 1vw sans-serif;
+   padding: 1vh;
+}
+
+#home-shop-btn:hover {
+   background-color: #1b1b1b;
+   border: 2px solid #1b1b1b;
+}
+
+/* *End Description Styling */
+
 /* *Hero Styling */
 
 #hero{
    display: flex;
    justify-content: center;
    align-items: center;
-   /* width: 80vw;
-   height: 80vh; */
-   /* background-image: url("images/bikerideincity.jpg");
-   background-size: contain;
-   background-repeat: no-repeat; */
-   margin: 3vw;
+   margin: 5vw;
 }
 
 #hero-container {
@@ -93,13 +124,14 @@ body {
 #bike-types {
    display: flex;
    justify-content: center;
-   margin-bottom: 3vw;
+   margin-bottom: 5vw;
 }
 
 #content-container {
    width: 80vw;
    display: flex;
    justify-content: space-around;
+   align-items: center;
 }
 
 .bike-styles {
@@ -124,8 +156,8 @@ body {
 }
 
 .home-images {
-   width: 15vw;
-   height: auto;
+   height: 40vh;
+   aspect-ratio: 8 / 11;
 }
 
 /* *End Content Styling */
@@ -133,10 +165,10 @@ body {
 /* *Footer Styling */
 
 #footer {
+   width: 100%;
    background-color: #FFF;
    display: flex;
    justify-content: center;
-   padding: 2vw;
 }
 
 .footer-link {
