@@ -1,27 +1,65 @@
-@import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap');
+        /* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+        
         *
         {
-            font-family: 'Balsamiq Sans', cursive;
+            font-family: Sans-Serif;
+            margin:0;
+            padding:0;
+            box-sizing: border-box;
         }
-        .hero
+        body{
+            font-size:xx-large;
+            width:100%;
+            height:80vh;
+        }
+        /* .hero
     {
         border-radius: 25px;
         width:200px;
         height:50px;
         text-align: center;
+    } */
+    form{
+        margin:auto;
+    }
+    input{
+        width:80%;
+        height:5vh;
     }
     button
     {
-        width:200px;
-        height:50px;
+        width:60%;
+        height:8vh;
     }
     .general
     {
+        margin:auto;
+        margin-top:5vh;
         border: 5px solid black;
         border-radius: 25px;
-        width:750px;
-        height:500px;
+        width:50vw;
+        height:70vh;
         background-color: aqua;
+        display:flex;
+        flex-direction: column;
+        justify-content: space-around;
+        text-align: center;
     }
-
-    

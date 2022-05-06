@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/shop.css') }}"
+    />
+    <title>Bike - Home</title>
+  </head>
+  <body>
+    <navbar>
+      <div id="navbar-container">
+        <img
+          id="navbar-logo"
+          src="static/css/images/logo.svg"
+          alt="Company Logo"
+        />
+        <div id="middle-navbar">
+          <a
+            href="{{ url_for('renderIndex') }}"
+            class="navbar-item middle-navbar-item"
+            >Home</a
+          >
+          <a
+            href="{{ url_for('renderShop') }}"
+            class="navbar-item middle-navbar-item"
+            >Shop</a
+          >
+        </div>
+        <div id="right-navbar">
+          <a
+            href="{{ url_for('renderLogin') }}"
+            class="navbar-item right-navbar-item"
+            >Login</a
+          >
+          <a
+            href="{{ url_for('renderRegister') }}"
+            class="navbar-item right-navbar-item"
+            >Sign Up</a
+          >
+          <a
+            href="{{ url_for('renderShop') }}"
+            class="navbar-item right-navbar-item"
+            ><ion-icon name="bag-outline"></ion-icon
+          ></a>
+        </div>
+      </div>
+    </navbar>
+    <section id="shop-header">
+      <h1>Shop</h1>
+      <hr />
+    </section>
+    <section id="shop">
+      <div class="shop-container">
+        <div class="shop-item">
+          <img class="item-img" src="static/css/images/bike.jpg" alt="Bike" />
+          <div class="item-text">
+            <p class="item-name">Bike</p>
+            <p class="item-price">$420.69</p>
+            <p class="item-desc">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta hic
+              ratione eaque maiores velit assumenda sunt porro dolore nemo
+              numquam dolor excepturi, odit eligendi quibusdam? Dignissimos
+              asperiores ad odio sapiente consectetur? Molestias repellat quidem
+              veritatis sunt.
+            </p>
+          </div>
+        </div>
+        <div class="shop-item">
+          <img class="item-img" src="static/css/images/bike.jpg" alt="Bike" />
+          <div class="item-text">
+            <p class="item-name">Bike</p>
+            <p class="item-price">$420.69</p>
+            <p class="item-desc">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta hic
+              ratione eaque maiores velit assumenda sunt porro dolore nemo
+              numquam dolor excepturi, odit eligendi quibusdam? Dignissimos
+              asperiores ad odio sapiente consectetur? Molestias repellat quidem
+              veritatis sunt.
+            </p>
+          </div>
+        </div>
+        <div class="shop-item">
+          <img class="item-img" src="static/css/images/bike.jpg" alt="Bike" />
+          <div class="item-text">
+            <p class="item-name">Bike</p>
+            <p class="item-price">$420.69</p>
+            <p class="item-desc">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta hic
+              ratione eaque maiores velit assumenda sunt porro dolore nemo
+              numquam dolor excepturi, odit eligendi quibusdam? Dignissimos
+              asperiores ad odio sapiente consectetur? Molestias repellat quidem
+              veritatis sunt.
+            </p>
+          </div>
+        </div>
+        <div class="shop-item">
+          <img class="item-img" src="static/css/images/bike.jpg" alt="Bike" />
+          <div class="item-text">
+            <p class="item-name">Bike</p>
+            <p class="item-price">$420.69</p>
+            <p class="item-desc">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta hic
+              ratione eaque maiores velit assumenda sunt porro dolore nemo
+              numquam dolor excepturi, odit eligendi quibusdam? Dignissimos
+              asperiores ad odio sapiente consectetur? Molestias repellat quidem
+              veritatis sunt.
+            </p>
+          </div>
+        </div>
+        <div class="shop-item">
+          <img class="item-img" src="static/css/images/bike.jpg" alt="Bike" />
+          <div class="item-text">
+            <p class="item-name">Bike</p>
+            <p class="item-price">$420.69</p>
+            <p class="item-desc">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta hic
+              ratione eaque maiores velit assumenda sunt porro dolore nemo
+              numquam dolor excepturi, odit eligendi quibusdam? Dignissimos
+              asperiores ad odio sapiente consectetur? Molestias repellat quidem
+              veritatis sunt.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

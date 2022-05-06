@@ -1,15 +1,68 @@
-@import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap');
+
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
 
 *{
-    font-family: 'Balsamiq Sans', cursive;
+    font-family: Sans-Serif;
     margin:0;
     padding:0;
     box-sizing: border-box;
 }
+/* 
+meter::-webkit-meter-bar {
+    background: none;
+    background-color: rgba(0, 0, 0, 0.1); */
+
+
+
+meter {
+  /* Reset the default appearance */
+    /* -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none; */
+
+    margin: 0 auto 1em;
+    width: 100%;
+    height: 5vh;
+  /* Applicable only to Firefox */
+    /* background: none;
+    background-color: rgba(0, 0, 0, 0.1); */
+}
+
+/* Webkit based browsers */
+meter[value="1"]::-webkit-meter-optimum-value { background: red; }
+meter[value="2"]::-webkit-meter-optimum-value { background: yellow; }
+meter[value="3"]::-webkit-meter-optimum-value { background: orange; }
+meter[value="4"]::-webkit-meter-optimum-value { background: green; }
+
+/* Gecko based browsers */
+meter[value="1"]::-moz-meter-bar { background: red; }
+meter[value="2"]::-moz-meter-bar { background: yellow; }
+meter[value="3"]::-moz-meter-bar { background: orange; }
+meter[value="4"]::-moz-meter-bar { background: green; }
+
 body{
     width:100%;
     height: 80vh;
-    background-color:tan;
+    background-color:powderblue;
 
 }
 form{
