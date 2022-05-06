@@ -29,7 +29,7 @@ pw = 'abc123'
 pw = pw.encode('utf-8')
 cur.execute('INSERT INTO users (email, address, password, role) VALUES(%s,%s,%s,%s) ON CONFLICT DO NOTHING;',('gmdombach211@stevenscollege.edu','4 spite rode',bcrypt.hashpw(pw,bcrypt.gensalt(10)),'A'))
 cur.execute('CREATE TABLE IF NOT EXISTS bikeStock (name TEXT UNIQUE NOT NULL,type TEXT,price DOUBLE PRECISION,image text,description TEXT)')
-cur.execute('CREATE TABLE IF NOT EXISTS bikesold (name TEXT,type TEXT,price DOUBLE PRECISION,image TEXT,description TEXT,customer BIGINT,FOREIGN KEY(customer) REFERENCES users(id))')
+cur.execute('CREATE TABLE IF NOT EXISTS bikesold (name TEXT,type TEXT,price DOUBLE PRECISION,image TEXT,description TEXT,color varchar(7),gears INT,rimsize INT,  customer BIGINT,FOREIGN KEY(customer) REFERENCES users(id))')
 con.commit()
 cur.close() 
 con.close()
