@@ -8,19 +8,65 @@
     <title>Administrator</title>
 </head>
 <body>
-    <header>
-        <h1>Administrator pages</h1>
-        <a href="http://localhost:5000/login">Log Out</a>
-       
-    </header>
-    <section id =bike_list>
-        <ul id = bikes>
+   		<navbar>
+			<div id="navbar-container">
+				<img
+					id="navbar-logo"
+					src="static/css/images/logo.svg"
+					alt="Company Logo"
+				/>
+				<div id="middle-navbar">
+					<a
+						href="{{ url_for('renderIndex') }}"
+						class="navbar-item middle-navbar-item"
+						>Home</a
+					>
+					<a
+						href="{{ url_for('renderShop') }}"
+						class="navbar-item middle-navbar-item"
+						>Shop</a
+					>
+				</div>
+				<div id="right-navbar">
+					<a
+						href="{{ url_for('renderLogin') }}"
+						class="navbar-item right-navbar-item"
+						>Login</a
+					>
+					<a
+						href="{{ url_for('renderRegister') }}"
+						class="navbar-item right-navbar-item"
+						>Sign Up</a
+					>
+					<a
+						href="{{ url_for('renderShop') }}"
+						class="navbar-item right-navbar-item"
+						><ion-icon name="bag-outline"></ion-icon
+					></a>
+				</div>
+			</div>
+		</navbar>
+    <section id =shop>
+        <div class="shop-container">
+
             {%for bike in bikes %}
-            <li><img src="static/uploads/{{bike[3]}}"><br/><div>{{bike[0]}}<br/> Price: $ {{bike[2]}}<br/></div></li>
+            <!-- <li><img src="static/uploads/{{bike[3]}}"><br/><div>{{bike[0]}}<br/> Price: $ {{bike[2]}}<br/></div></li> -->
+            <div class="shop-item">
+            <img class="item-img" src="static/uploads/{{bike[3]}}" alt="Bike" />
+                <div class="item-text">
+                    <p class="item-name">{{bike[0]}}</p>
+                    <p class="item-price">${{bike[2]}}</p>
+                    <p class="item-desc">
+                    {{bike[4]}}
+                    </p>
+                </div>
+            </div>
             {%endfor%}
-        </ul>
+        </div>
     </section>
+    <section class = functions>
     <section class = upload>
+        <h2>Add Bikes</h2>
         <form class = newbikes enctype=multipart/form-data action = "{{url_for('addBikes')}}" method = 'POST'>
             <input type = text name = name placeholder ='Input bike name'>
             <br/>
@@ -31,13 +77,18 @@
             <input type="text" name = price = price placeholder =price>
             <br/>
             <input type="text" name ='description' placeholder ='Description'>
-            <input type = file name = 'file'>
+            <label class =custom-file-upload>
+                Drag Image Here Or Click To Select
+            <input type = file name = 'file' class = filesupload>
+            </label>
+            
             <input type="submit" name = add value ='ADD BIKE'>
         </form>
     </section>
     <br/>
     <br/>
     <section class = delete >
+        <h2>Remove Bikes</h2>
         <form name = 'delete' action="{{url_for('addBikes')}}" class = 'delete' method = 'POST'>
         <select name = bikes>
         {%for bike in bikes%}
@@ -46,6 +97,7 @@
         </select> 
         <input type="submit" name="delete" value="DELETE BIKE"></input>
         </form>
+    </section>
     </section>
     
 </body>
