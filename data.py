@@ -21,4 +21,32 @@ def decrypt_text(encrypted_text):
     decoded = f.decrypt(encrypted_text)
     return decoded.decode("utf-8")
 
-print(encrypt_text('3 appple lane'))
+def check_user(num):
+    if not isinstance(num, int):
+        return False
+    con = connect()
+    cur = con.cursor()
+    cur.execute("SELECT id FROM users")
+    data = cur.fetchall()
+    cur.close()
+    con.close()
+    print(data)
+    for i in range(len(data)):
+        if data[i][0] == num:
+            return True
+    return False
+
+def check_admin(num):
+    if not isinstance(num, int):
+        return False
+    con = connect()
+    cur = con.cursor()
+    cur.execute("SELECT id,role FROM users")
+    data = cur.fetchall()
+    cur.close()
+    con.close()
+    print(data)
+    for i in range(len(data)):
+        if data[i][0] == num and data[i][1]:
+            return True
+    return False

@@ -37,8 +37,7 @@ con.close()
 #render Admin page and pass bike data to the page
 @app.route('/administrator')
 def admin():
-   if cusr == '':
-      return render_template('login.html',error='Please Log in To your Account')
+   if data.check_admin(cusr):return render_template('login.html',error='Please Log in To your Account')
    con = data.connect()
    cur = con.cursor()
    cur.execute('SELECT * FROM bikestock')
