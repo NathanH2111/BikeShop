@@ -37,6 +37,7 @@ con.close()
 #render Admin page and pass bike data to the page
 @app.route('/administrator')
 def admin():
+   if data.check_admin(cusr):return render_template('login.html',error='Please Log in To your Account')
    con = data.connect()
    cur = con.cursor()
    cur.execute('SELECT * FROM bikestock')
@@ -148,7 +149,7 @@ def loginFunc():
    print(tempPass)
    if bcrypt.checkpw(password,tempPass):
       global cusr
-      cusr = users[0][3]# save user code for later use
+      cusr = int(users[0][3])# save user code for later use
       if users[0][1] == 'A':return redirect(url_for('admin',idcode = cusr))#if user is an admin redirect to admin page
 
       if users[0][1] == 'U':return redirect(url_for('renderShop',idcode = cusr))#if user is a regular user redirect to the shop
@@ -193,6 +194,17 @@ def register_register():
 
 @app.route("/shop")
 def renderShop():
+   if cusr == '':return render_template('login.html',error='Please Log in To your Account')
    return render_template('shop.html') # render the shop template
+@app.route("/logout")
+def renderLogout():
+   return render_template('login.html')
+@app.route("/logout")
+def logOut():
+   global cusr
+   cusr = ''
+   print(cusr)
+   return redirect(url_for('renderLogin'))
+
 
 if __name__ == '__main__':app.run(debug=True)
