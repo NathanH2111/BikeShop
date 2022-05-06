@@ -194,7 +194,7 @@ def register_register():
 
 @app.route("/shop")
 def renderShop():
-   if cusr == '':return render_template('login.html',error='Please Log in To your Account')
+   # if cusr == '':return render_template('login.html',error='Please Log in To your Account')
    return render_template('shop.html') # render the shop template
 @app.route("/logout")
 def renderLogout():
@@ -206,5 +206,26 @@ def logOut():
    print(cusr)
    return redirect(url_for('renderLogin'))
 
+@app.route("/custom")
+def renderCustom():
+   return render_template('custom.html')
+
+@app.route("/custom", methods=["GET", "POST"])
+def purchaseBike():
+   if request.method == "POST":
+      bike_style = request.form.get("type")
+      gears = request.form.get("gears")
+      tire_size = request.form.get("tire-size")
+      color = request.form.get("bike-color")
+      ccn = request.form.get("ccn")
+      cvv = request.form.get("cvv")
+
+      print(bike_style, gears, tire_size, color, ccn, cvv)
+      
+      return redirect(url_for('renderIndex'))
+
+   # conn = data.connect()
+   # cur = conn.cursor()
+   # cur.execute("INSERT INTO bikessold (name,type,price,image,description,color,gears,rimsize,customer) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)", ())
 
 if __name__ == '__main__':app.run(debug=True)
