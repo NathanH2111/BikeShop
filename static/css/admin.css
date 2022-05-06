@@ -30,6 +30,7 @@ body {
 }
 /* upload data styling */
 .upload {
+  border: 1px solid black;
   width: 40%;
   margin: auto;
   height: 100%;
@@ -41,23 +42,26 @@ body {
 .upload form {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-evenly;
+  align-items: center;
   height: 90%;
   font-size: x-large;
 }
 .upload form input {
-  width: 100%;
+  width: 80%;
   height: 10vh;
   text-align: center;
 }
 .upload form select {
-  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 80%;
   height: 10vh;
   text-align: center;
 }
 
 .upload form option {
-  width: 100%;
+  width: 80%;
   height: 10vh;
   text-align: center;
 }
@@ -67,11 +71,11 @@ body {
 }
 
 .custom-file-upload {
-  margin-right: 30px;
+  font-size: large;
   margin-top: 10px;
   margin-bottom: 10px;
   border: 1px solid black;
-  width: 100%;
+  width: 80%;
   height: 10vh;
   text-align: center;
   padding: 20px 20px;
@@ -94,10 +98,12 @@ body {
 .delete form {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-evenly;
   height: 100%;
   font-size: x-large;
   align-items: center;
+  width: 80%;
+  height: 100%;
 }
 .delete select {
   height: 5vh;
@@ -112,6 +118,9 @@ body {
 
 /* puting the add and delete forms in a flex box to get them lined up*/
 .functions {
+  border-top:5px black solid;
+  margin-top: 5vh;
+  padding-top: 5vh;
   height: 50vh;
   display: flex;
   justify-content: space-between;
