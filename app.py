@@ -37,15 +37,17 @@ con.close()
 #render Admin page and pass bike data to the page
 @app.route('/administrator')
 def admin():
-   if data.check_admin(cusr):return render_template('login.html',error='Please Log in To your Account')
-   con = data.connect()
-   cur = con.cursor()
-   cur.execute('SELECT * FROM bikestock')
-   dat = cur.fetchall()
-   return render_template('admin.html',bikes = dat )
+   if not data.check_admin(cusr):return render_template('login.html',error='Please Log in To your Account')
+   else:
+      con = data.connect()
+      cur = con.cursor()
+      cur.execute('SELECT * FROM bikestock')
+      dat = cur.fetchall()
+      return render_template('admin.html',bikes = dat,idcode=cusr )
 
 @app.route('/administrator',methods=['POST','GET'])
 def addBikes():
+   if not data.check_admin(cusr):return render_template('login.html',error='Please Log in To your Account')
    # Proccess input from the add bikes form
    if 'add' in request.form:
       name = request.form.get('name')
@@ -125,10 +127,10 @@ def mngrAuth():
       
       return redirect(url_for('renderLogin')) # redirect to login page
 
-   else:return redirect(url_for('renderRegister',error='Invalid code'))# return error if password is incorrect
+   else:return redirect(url_for('renderRegister',error='Invalid code')) # return error if password is incorrect
 
 @app.route("/login")
-def renderLogin():return render_template('login.html',error = '')# render login template
+def renderLogin():return render_template('login.html',error = '') # render login template
    
 @app.route('/login',methods = ['POST','GET'])
 def loginFunc():
@@ -150,7 +152,7 @@ def loginFunc():
    if bcrypt.checkpw(password,tempPass):
       global cusr
       cusr = int(users[0][3])# save user code for later use
-      if users[0][1] == 'A':return redirect(url_for('admin',idcode = cusr))#if user is an admin redirect to admin page
+      if users[0][1] == 'A':return redirect(url_for('admin'))#if user is an admin redirect to admin page
 
       if users[0][1] == 'U':return redirect(url_for('renderShop',idcode = cusr))#if user is a regular user redirect to the shop
       return render_template('Login.html',error=' oops! An error occured please try to log in again in a few minutes')
@@ -177,7 +179,7 @@ def register_register():
       if password == None:return render_template('Register.html',error=' please input a password')
 
       if not check:
-         if re.match('(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$',password):return render_template('register.html',error='Passwords must contaion one uppercase one lowercase one number and one symbol \n passwords must be at least 8 characters long')
+         if not re.match('/^(?=.*\d).{8,}$/',password):return render_template('Register.html',error = ' password not strong enough')
          if mgr == '1':# if the manager checkbox is checked store the registration data in a list and redirect to the admin login page for manager authorization
             global tempData
             tempData = [userName,data.encrypt_text(userAddress),bcrypt.hashpw(password.encode('utf-8'),bcrypt.gensalt(10))]
@@ -198,6 +200,8 @@ def renderShop():
    return render_template('shop.html') # render the shop template
 @app.route("/logout")
 def renderLogout():
+   global cusr
+   cusr = ''
    return render_template('login.html')
 @app.route("/logout")
 def logOut():
