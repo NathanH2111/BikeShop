@@ -10,7 +10,47 @@
     <title>Document</title>
 </head>
 <body>
-    <form method="post" action="http://localhost:5000/register">
+  		<navbar>
+			<div id="navbar-container">
+				<img
+					id="navbar-logo"
+					src="static/css/images/logo.svg"
+					alt="Company Logo"
+				/>
+				<div id="middle-navbar">
+					<a
+						href="{{ url_for('renderIndex') }}"
+						class="navbar-item middle-navbar-item"
+						>Home</a
+					>
+					<a
+						href="{{ url_for('renderShop') }}"
+						class="navbar-item middle-navbar-item"
+						>Shop</a
+					>
+				</div>
+				<div id="right-navbar">
+					<a
+						href="{{ url_for('renderLogin') }}"
+						class="navbar-item right-navbar-item"
+						>Login</a
+					>
+					<a
+						href="{{ url_for('renderRegister') }}"
+						class="navbar-item right-navbar-item"
+						>Sign Up</a
+					>
+					<a
+						href="{{ url_for('renderShop') }}"
+						class="navbar-item right-navbar-item"
+						><ion-icon name="bag-outline"></ion-icon
+					></a>
+				
+				</div>
+			</div>
+		</navbar>
+  <div class="general">
+    <form class="form1" method="post" action="http://localhost:5000/register">
         <input type="email" name="eml" placeholder="Enter your email address">
         <br/>
         <input type="'text" name="adr" placeholder="Enter your shipping address">
@@ -27,6 +67,8 @@
         <h3>{{error}}</h3>
         <a href="http://localhost:5000/login">Already a user? log in</a>
     </form>
+    </div>
+    
   
 
     <script>

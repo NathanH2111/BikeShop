@@ -47,6 +47,8 @@ def check_admin(num):
     con.close()
     print(data)
     for i in range(len(data)):
-        if data[i][0] == num and data[i][1]:
+        
+        if data[i][0] == num and data[i][1] == 'A':
+            print(data[i][0],data[i][1])
             return True
     return False
