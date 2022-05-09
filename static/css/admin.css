@@ -24,10 +24,12 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 body {
   width: 100%;
   height: 100vh;
 }
+
 /* upload data styling */
 .upload {
   border: 1px solid black;
@@ -39,6 +41,7 @@ body {
   justify-content: flex-start;
   align-items: center;
 }
+
 .upload form {
   display: flex;
   flex-direction: column;
@@ -47,11 +50,13 @@ body {
   height: 90%;
   font-size: x-large;
 }
+
 .upload form input {
   width: 80%;
   height: 10vh;
   text-align: center;
 }
+
 .upload form select {
   margin-top: 10px;
   margin-bottom: 10px;
@@ -95,6 +100,7 @@ body {
   align-items: center;
   margin: auto;
 }
+
 .delete form {
   display: flex;
   flex-direction: column;
@@ -105,6 +111,7 @@ body {
   width: 80%;
   height: 100%;
 }
+
 .delete select {
   height: 5vh;
   width: 80%;
@@ -114,11 +121,12 @@ body {
   width: 80%;
   height: 3vh;
 }
+
 /* end of delete form styling */
 
 /* puting the add and delete forms in a flex box to get them lined up*/
 .functions {
-  border-top:5px black solid;
+  border-top: 5px black solid;
   margin-top: 5vh;
   padding-top: 5vh;
   height: 50vh;
@@ -127,7 +135,7 @@ body {
 }
 
 /*End of form styling*/
-input[type='file'] {
+input[type="file"] {
   display: none;
 }
 
