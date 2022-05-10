@@ -17,29 +17,20 @@ app.secret_key = "secret key"
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 102
-con = data.conect()
+con = data.connect()
 cur = con.cursor()
 global tmpDta
 tmpDta =[]
 
-# create all tables needed for the app to run and insert the initial Administrator account
-cur.execute('CREATE TABLE IF NOT EXISTS users (id BIGSERIAL PRIMARY KEY NOT NULL, email text UNIQUE NOT NULL,address BYTEA, password BYTEA,role VARCHAR(5))')
-con.commit()
-pw = 'abc123'
-pw = pw.encode('utf-8')
-cur.execute('INSERT INTO users (email, address, password, role) VALUES(%s,%s,%s,%s) ON CONFLICT DO NOTHING;',('gmdombach211@stevenscollege.edu','4 spite rode',bcrypt.hashpw(pw,bcrypt.gensalt(10)),'A'))
-cur.execute('CREATE TABLE IF NOT EXISTS bikeStock (name TEXT UNIQUE NOT NULL,type TEXT,price DOUBLE PRECISION,image text,description TEXT)')
-cur.execute('CREATE TABLE IF NOT EXISTS bikesold (name TEXT,type TEXT,price DOUBLE PRECISION,image TEXT,description TEXT,color varchar(7),gears INT,rimsize INT,  customer BIGINT,FOREIGN KEY(customer) REFERENCES users(id))')
-con.commit()
-cur.close() 
-con.close()
+data.initialInsert() #Initialize DB tables if not exists
+
 
 #render Admin page and pass bike data to the page
 @app.route('/administrator')
 def admin():
    if not data.check_admin(cusr):return render_template('login.html',error='Please Log in To your Account')
    else:
-      con = data.conect()
+      con = data.connect()
       cur = con.cursor()
       cur.execute('SELECT * FROM bikestock')
       dat = cur.fetchall()
@@ -64,7 +55,7 @@ def addBikes():
          filename = secure_filename(file.filename)
          file.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
          print('upload_image filename: ' + filename)
-         con = data.conect()
+         con = data.connect()
          cur = con.cursor()
          cur.execute('INSERT INTO  bikestock (name,type,price,image,description) VALUES(%s,%s,%s,%s,%s)',(f'{name}',f'{type}',f'{price}',f'{filename}',f'{desc}'))
          con.commit()
@@ -77,7 +68,7 @@ def addBikes():
 
 #proccess a bike deletion
    if 'delete' in request.form:
-      con = data.conect() 
+      con = data.connect() 
       cur = con.cursor()
       name = request.form.get('bikes')
       print(name)
@@ -102,7 +93,7 @@ def mngrAuth():
    pwr = request.form.get('pw')
    pwr = pwr.encode('utf-8')
 
-   con = data.conect()
+   con = data.connect()
    cur = con.cursor()
    cur.execute("SELECT email,role, password,id FROM users WHERE email = %s",(f"{eml}",)) #check if the admin email adress exists
    users = cur.fetchall()
@@ -116,7 +107,7 @@ def mngrAuth():
    print(tmpPwr)
    
    if bcrypt.checkpw(pwr,tmpPwr) and users[0][1] == 'A': # check if password is correct and that the user is an administrator
-      con = data.conect()
+      con = data.connect()
       cur = con.cursor()
       cur.execute("INSERT INTO users (email,address,role,password) VALUES(%s,%s,%s,%s)",(tmpDta[0],tmpDta[1],'A',tmpDta[2]))#insert data to db for new user
       con.commit()
@@ -138,7 +129,7 @@ def loginFunc():
    pwr = request.form.get('pw')
    pwr = pwr.encode('utf-8')
 
-   con = data.conect()
+   con = data.connect()
    cur = con.cursor()
    cur.execute("SELECT email,role, password,id FROM users WHERE email = %s",(f"{eml}",))# check for user in db
    users = cur.fetchall()
@@ -169,7 +160,7 @@ def register_register():
       adr = request.form.get('adr')
       pwr = request.form.get('pwd')
       mgr = request.form.get('mngr')
-      con = data.conect()
+      con = data.connect()
       cur = con.cursor()
       cur.execute('SELECT email from users WHERE email = %s',(f"{eml}",))
       check = cur.fetchall()
@@ -228,7 +219,7 @@ def purchaseBike():
       
       return redirect(url_for('renderIndex'))
 
-   # con = data.conect()
+   # con = data.connect()
    # cur = con.cursor()
    # cur.execute("INSERT INTO bikessold (name,type,price,image,description,color,gears,rimsize,customer) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)", ())
 
