@@ -1,209 +1,209 @@
 /* width */
 ::-webkit-scrollbar {
-  width: 5px;
+    width: 5px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+    background: #f1f1f1;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888;
+    background: #888;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+    background: #555;
 }
 
 * {
-  font-family: sans-serif;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-  width: 100%;
-  height: 100vh;
+    width: 100%;
+    height: 100vh;
 }
 
 /* upload data styling */
 .upload {
-  border: 1px solid black;
-  width: 40%;
-  margin: auto;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
+    border: 1px solid black;
+    width: 40%;
+    margin: auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .upload form {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-  height: 90%;
-  font-size: x-large;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 90%;
+    font-size: x-large;
 }
 
 .upload form input {
-  width: 80%;
-  height: 10vh;
-  text-align: center;
+    width: 80%;
+    height: 10vh;
+    text-align: center;
 }
 
 .upload form select {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  width: 80%;
-  height: 10vh;
-  text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 80%;
+    height: 10vh;
+    text-align: center;
 }
 
 .upload form option {
-  width: 80%;
-  height: 10vh;
-  text-align: center;
+    width: 80%;
+    height: 10vh;
+    text-align: center;
 }
 
 .filesupload {
-  width: 80%;
+    width: 80%;
 }
 
 .custom-file-upload {
-  font-size: large;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  border: 1px solid black;
-  width: 80%;
-  height: 10vh;
-  text-align: center;
-  padding: 20px 20px;
-  cursor: pointer;
+    font-size: large;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 1px solid black;
+    width: 80%;
+    height: 10vh;
+    text-align: center;
+    padding: 20px 20px;
+    cursor: pointer;
 }
 
 /*end of upload styling */
 
 /* styling for delete item form*/
 .delete {
-  width: 40%;
-  height: 100%;
-  border: 1px solid black;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  margin: auto;
+    width: 40%;
+    height: 100%;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin: auto;
 }
 
 .delete form {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  height: 100%;
-  font-size: x-large;
-  align-items: center;
-  width: 80%;
-  height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 100%;
+    font-size: x-large;
+    align-items: center;
+    width: 80%;
+    height: 100%;
 }
 
 .delete select {
-  height: 5vh;
-  width: 80%;
+    height: 5vh;
+    width: 80%;
 }
 
 .delete input {
-  width: 80%;
-  height: 3vh;
+    width: 80%;
+    height: 3vh;
 }
 
 /* end of delete form styling */
 
 /* puting the add and delete forms in a flex box to get them lined up*/
 .functions {
-  border-top: 5px black solid;
-  margin-top: 5vh;
-  padding-top: 5vh;
-  height: 50vh;
-  display: flex;
-  justify-content: space-between;
+    border-top: 5px black solid;
+    margin-top: 5vh;
+    padding-top: 5vh;
+    height: 50vh;
+    display: flex;
+    justify-content: space-between;
 }
 
 /*End of form styling*/
-input[type="file"] {
-  display: none;
+input[type='file'] {
+    display: none;
 }
 
 /* *Navbar Styling */
 
 navbar {
-  width: 100%;
+    width: 100%;
 }
 
 #navbar-logo {
-  width: 3vw;
+    width: 3vw;
 }
 
 #middle-navbar {
-  width: 10%;
-  display: flex;
-  justify-content: space-around;
+    width: 10%;
+    display: flex;
+    justify-content: space-around;
 }
 
 #right-navbar {
-  width: 10%;
-  display: flex;
-  justify-content: space-around;
+    width: 10%;
+    display: flex;
+    justify-content: space-around;
 }
 
 #navbar-container {
-  background-color: #ffffff;
-  width: 100%;
-  display: flex;
-  align-items: center;
+    background-color: #ffffff;
+    width: 100%;
+    display: flex;
+    align-items: center;
 }
 
 .navbar-item {
-  color: #000000;
-  float: left;
-  text-decoration: none;
+    color: #000000;
+    float: left;
+    text-decoration: none;
 }
 
 /* *End Navbar Styling */
 
 #shop {
-  width: 100%;
-  display: flex;
-  justify-content: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .shop-container {
-  display: grid;
-  grid-template-columns: auto auto auto;
-  gap: 1vw;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 1vw;
 }
 
 .shop-item {
-  width: 20vw;
-  background-color: #ffffff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 1vw;
-  box-shadow: 1px 1px 5px;
+    width: 20vw;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1vw;
+    box-shadow: 1px 1px 5px;
 }
 
 .item-img {
-  max-width: 100%;
-  height: auto;
-  /* box-shadow: 1px 1px 5px; */
+    max-width: 100%;
+    height: auto;
+    /* box-shadow: 1px 1px 5px; */
 }
 
 .item-text {
-  margin-top: 1vw;
+    margin-top: 1vw;
 }
