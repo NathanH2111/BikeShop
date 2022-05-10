@@ -1,51 +1,51 @@
 * {
-	padding: 0;
-	margin: 0;
-	font-family: Sans-Serif;
+    padding: 0;
+    margin: 0;
+    font-family: Sans-Serif;
 }
 
 body {
-	font-size: 100%;
-	background-color: #f5f5f5;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+    font-size: 100%;
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* *Navbar Styling */
 
 navbar {
-	width: 100%;
-	margin-bottom: 5vw;
+    width: 100%;
+    margin-bottom: 5vw;
 }
 
 #navbar-logo {
-	width: 3vw;
+    width: 3vw;
 }
 
 #middle-navbar {
-	width: 10%;
-	display: flex;
-	justify-content: space-around;
+    width: 10%;
+    display: flex;
+    justify-content: space-around;
 }
 
 #right-navbar {
-	width: 10%;
-	display: flex;
-	justify-content: space-around;
+    width: 10%;
+    display: flex;
+    justify-content: space-around;
 }
 
 #navbar-container {
-	background-color: #ffffff;
-	width: 100%;
-	display: flex;
-	align-items: center;
+    background-color: #ffffff;
+    width: 100%;
+    display: flex;
+    align-items: center;
 }
 
 .navbar-item {
-	color: #000000;
-	float: left;
-	text-decoration: none;
+    color: #000000;
+    float: left;
+    text-decoration: none;
 }
 
 /* *End Navbar Styling */
@@ -53,13 +53,13 @@ navbar {
 /* *Header Styling */
 
 #shop-header {
-	width: 50vw;
-	text-align: center;
-	margin-bottom: 3vw;
+    width: 50vw;
+    text-align: center;
+    margin-bottom: 3vw;
 }
 
 #shop-header h1 {
-	font: bold 3vw sans-serif;
+    font: bold 3vw sans-serif;
 }
 
 /* *End Header Styling */
@@ -67,35 +67,35 @@ navbar {
 /* *Shop Styling */
 
 #shop {
-	width: 100%;
-	display: flex;
-	justify-content: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .shop-container {
-	display: grid;
-	grid-template-columns: auto auto auto;
-	gap: 1vw;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 1vw;
 }
 
 .shop-item {
-	width: 20vw;
-	background-color: #ffffff;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	padding: 1vw;
-	box-shadow: 1px 1px 5px;
+    width: 20vw;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1vw;
+    box-shadow: 1px 1px 5px;
 }
 
 .item-img {
-	max-width: 100%;
-	height: auto;
-	/* box-shadow: 1px 1px 5px; */
+    max-width: 100%;
+    height: auto;
+    /* box-shadow: 1px 1px 5px; */
 }
 
 .item-text {
-	margin-top: 1vw;
+    margin-top: 1vw;
 }
 
 /* *End Shop Styling */
