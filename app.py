@@ -19,32 +19,26 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 102
 con = data.connect()
 cur = con.cursor()
-global tempData
-tempData =[]
+global tmpDta
+tmpDta =[]
 
-# create all tables needed for the app to run and insert the initial Administrator account
-cur.execute('CREATE TABLE IF NOT EXISTS users (id BIGSERIAL PRIMARY KEY NOT NULL, email text UNIQUE NOT NULL,address BYTEA, password BYTEA,role VARCHAR(5))')
-con.commit()
-pw = 'abc123'
-pw = pw.encode('utf-8')
-cur.execute('INSERT INTO users (email, address, password, role) VALUES(%s,%s,%s,%s) ON CONFLICT DO NOTHING;',('gmdombach211@stevenscollege.edu','4 spite rode',bcrypt.hashpw(pw,bcrypt.gensalt(10)),'A'))
-cur.execute('CREATE TABLE IF NOT EXISTS bikeStock (name TEXT UNIQUE NOT NULL,type TEXT,price DOUBLE PRECISION,image text,description TEXT)')
-cur.execute('CREATE TABLE IF NOT EXISTS bikesold (name TEXT,type TEXT,price DOUBLE PRECISION,image TEXT,description TEXT,color varchar(7),gears INT,rimsize INT,  customer BIGINT,FOREIGN KEY(customer) REFERENCES users(id))')
-con.commit()
-cur.close() 
-con.close()
+data.initialInsert() #Initialize DB tables if not exists
+
 
 #render Admin page and pass bike data to the page
 @app.route('/administrator')
 def admin():
-   con = data.connect()
-   cur = con.cursor()
-   cur.execute('SELECT * FROM bikestock')
-   dat = cur.fetchall()
-   return render_template('admin.html',bikes = dat )
+   if not data.check_admin(cusr):return render_template('login.html',error='Please Log in To your Account')
+   else:
+      con = data.connect()
+      cur = con.cursor()
+      cur.execute('SELECT * FROM bikestock')
+      dat = cur.fetchall()
+      return render_template('admin.html',bikes = dat,idcode=cusr )
 
 @app.route('/administrator',methods=['POST','GET'])
 def addBikes():
+   if not data.check_admin(cusr):return render_template('login.html',error='Please Log in To your Account')
    # Proccess input from the add bikes form
    if 'add' in request.form:
       name = request.form.get('name')
@@ -90,66 +84,30 @@ def addBikes():
 @app.route("/")
 def renderIndex():return render_template('index.html')
 
-@app.route('/login/administrator') # login error for administrator registration
-def adminLogin():return render_template('login.html',error = 'please enter admin credentials')
-
-@app.route("/login/administrator",methods =['POST','GET']) #check if administrator auth to create a new admin is authentic
-def mngrAuth():
-   userName = request.form.get('nm')
-   password = request.form.get('pw')
-   password = password.encode('utf-8')
-
-   conn = data.connect()
-   curr = conn.cursor()
-   curr.execute("SELECT email,role, password,id FROM users WHERE email = %s",(f"{userName}",)) #check if the admin email adress exists
-   users = curr.fetchall()
-   curr.close()
-   conn.close()
-
-   if not users:return render_template('Login.html',error='Incorrect Username or Password') # return error if username is incorrect or does not exist.
-
-   print(users)
-   tempPass = bytes(users[0][2])
-   print(tempPass)
-   
-   if bcrypt.checkpw(password,tempPass) and users[0][1] == 'A': # check if password is correct and that the user is an administrator
-      con = data.connect()
-      curr = con.cursor()
-      curr.execute("INSERT INTO users (email,address,role,password) VALUES(%s,%s,%s,%s)",(tempData[0],tempData[1],'A',tempData[2]))#insert data to db for new user
-      con.commit()
-      curr.close()
-      con.close()
-      userName = ''
-      password = ''
-      
-      return redirect(url_for('renderLogin')) # redirect to login page
-
-   else:return redirect(url_for('renderRegister',error='Invalid code'))# return error if password is incorrect
-
 @app.route("/login")
-def renderLogin():return render_template('login.html',error = '')# render login template
+def renderLogin():return render_template('login.html',error = '') # render login template
    
 @app.route('/login',methods = ['POST','GET'])
 def loginFunc():
-   userName = request.form.get('nm')
-   password = request.form.get('pw')
-   password = password.encode('utf-8')
+   eml = request.form.get('nm')
+   pwr = request.form.get('pw')
+   pwr = pwr.encode('utf-8')
 
-   conn = data.connect()
-   curr = conn.cursor()
-   curr.execute("SELECT email,role, password,id FROM users WHERE email = %s",(f"{userName}",))# check for user in db
-   users = curr.fetchall()
-   curr.close()
-   conn.close()
+   con = data.connect()
+   cur = con.cursor()
+   cur.execute("SELECT email,role, password,id FROM users WHERE email = %s",(f"{eml}",))# check for user in db
+   users = cur.fetchall()
+   cur.close()
+   con.close()
    if not users:return render_template('Login.html',error='Incorrect Username or Password') # return error if username incorrect or desnt exist
 
    print(users)
-   tempPass = bytes(users[0][2])# convert pw to bytes
-   print(tempPass)
-   if bcrypt.checkpw(password,tempPass):
+   tmpPwr = bytes(users[0][2])# convert pw to bytes
+   print(tmpPwr)
+   if bcrypt.checkpw(pwr,tmpPwr):
       global cusr
-      cusr = users[0][3]# save user code for later use
-      if users[0][1] == 'A':return redirect(url_for('admin',idcode = cusr))#if user is an admin redirect to admin page
+      cusr = int(users[0][3])# save user code for later use
+      if users[0][1] == 'A':return redirect(url_for('admin'))#if user is an admin redirect to admin page
 
       if users[0][1] == 'U':return redirect(url_for('renderShop',idcode = cusr))#if user is a regular user redirect to the shop
       return render_template('Login.html',error=' oops! An error occured please try to log in again in a few minutes')
@@ -162,37 +120,71 @@ def renderRegister():return render_template('register.html',error = '')
 @app.route('/register',methods=['POST','GET'])
 def register_register():
    if request.method == 'POST':
-      userName = request.form.get('eml')
-      userAddress = request.form.get('adr')
-      password = request.form.get('pwd')
+      eml = request.form.get('eml')
+      adr = request.form.get('adr')
+      pwr = request.form.get('pwd')
       mgr = request.form.get('mngr')
-      conn = data.connect()
-      curr = conn.cursor()
-      curr.execute('SELECT email from users WHERE email = %s',(f"{userName}",))
-      check = curr.fetchall()
+      con = data.connect()
+      cur = con.cursor()
+      cur.execute('SELECT email from users WHERE email = %s',(f"{eml}",))
+      check = cur.fetchall()
 
       print(check)
 
-      if password == None:return render_template('Register.html',error=' please input a password')
+      if pwr == None:return render_template('Register.html',error=' please input a password')
 
       if not check:
-         if re.match('(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$',password):return render_template('register.html',error='Passwords must contaion one uppercase one lowercase one number and one symbol \n passwords must be at least 8 characters long')
+         if  re.match('/^(?=.*\d).{8,}$/',pwr):return render_template('Register.html',error = ' password not strong enough')
          if mgr == '1':# if the manager checkbox is checked store the registration data in a list and redirect to the admin login page for manager authorization
-            global tempData
-            tempData = [userName,data.encrypt_text(userAddress),bcrypt.hashpw(password.encode('utf-8'),bcrypt.gensalt(10))]
+            global tmpDta
+            tmpDta = [eml,data.encrypt_text(adr),bcrypt.hashpw(pwr.encode('utf-8'),bcrypt.gensalt(10))]
             return redirect(url_for('adminLogin'))
 
-         newpass = bcrypt.hashpw(password.encode('utf-8'),bcrypt.gensalt(10))#hash and salt the password
-         curr.execute("INSERT INTO users (email,address,role,password) VALUES(%s,%s,%s,%s)",(f"{userName}",data.encrypt_text(userAddress),f"U",newpass))# insert the new user into the database
-         conn.commit()
+         newpass = bcrypt.hashpw(pwr.encode('utf-8'),bcrypt.gensalt(10))#hash and salt the password
+         cur.execute("INSERT INTO users (email,address,role,password) VALUES(%s,%s,%s,%s)",(f"{eml}",data.encrypt_text(adr),f"U",newpass))# insert the new user into the database
+         con.commit()
          cur.close()
-         conn.close()
+         con.close()
          return redirect(url_for('renderLogin'))
 
       else:return render_template('register.html',error ='User already Exists')
 
 @app.route("/shop")
 def renderShop():
+   # if cusr == '':return render_template('login.html',error='Please Log in To your Account')
    return render_template('shop.html') # render the shop template
+@app.route("/logout")
+def renderLogout():
+   global cusr
+   cusr = ''
+   return render_template('login.html')
+@app.route("/logout")
+def logOut():
+   global cusr
+   cusr = ''
+   print(cusr)
+   return redirect(url_for('renderLogin'))
+
+@app.route("/custom")
+def renderCustom():
+   return render_template('custom.html')
+
+@app.route("/custom", methods=["GET", "POST"])
+def purchaseBike():
+   if request.method == "POST":
+      bike_style = request.form.get("type")
+      gears = request.form.get("gears")
+      tire_size = request.form.get("tire-size")
+      color = request.form.get("bike-color")
+      ccn = request.form.get("ccn")
+      cvv = request.form.get("cvv")
+
+      print(bike_style, gears, tire_size, color, ccn, cvv)
+      
+      return redirect(url_for('renderIndex'))
+
+   # con = data.connect()
+   # cur = con.cursor()
+   # cur.execute("INSERT INTO bikessold (name,type,price,image,description,color,gears,rimsize,customer) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)", ())
 
 if __name__ == '__main__':app.run(debug=True)

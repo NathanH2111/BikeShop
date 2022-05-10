@@ -6,17 +6,53 @@
 
 </head>
 <body>
+    		<navbar>
+			<div id="navbar-container">
+				<img
+					id="navbar-logo"
+					src="static/css/images/logo.svg"
+					alt="Company Logo"
+				/>
+				<div id="middle-navbar">
+					<a
+						href="{{ url_for('renderIndex') }}"
+						class="navbar-item middle-navbar-item"
+						>Home</a
+					>
+					<a
+						href="{{ url_for('renderShop') }}"
+						class="navbar-item middle-navbar-item"
+						>Shop</a
+					>
+				</div>
+				<div id="right-navbar">
+					<a
+						href="{{ url_for('renderLogin') }}"
+						class="navbar-item right-navbar-item"
+						>Login</a
+					>
+					<a
+						href="{{ url_for('renderRegister') }}"
+						class="navbar-item right-navbar-item"
+						>Sign Up</a
+					>
+					<a
+						href="{{ url_for('renderShop') }}"
+						class="navbar-item right-navbar-item"
+						><ion-icon name="bag-outline"></ion-icon
+					></a>
+					
+				</div>
+			</div>
+		</navbar>
     <section>
         <div class="general">
         <h1>Login</h1>
         <form class = form1 action = "http://localhost:5000/login" method = "POST">
-            <label for="RUsername">EMAIL: </label>
+            <input type="emmail" id="Username" name ='nm' placeholder="EMAIL">
             <br/>
-            <input type="emmail" id="Username" name ='nm'>
             <br/>
-            <label for="Password">PASSWORD: </label>
-            <br/>
-            <input type="password" id="Password" name = 'pw'>
+            <input type="password" id="Password" name = 'pw' placeholder="PASSWORD">
             <br/>
             <br/>
             <button type="submit" value="submit">Login</button>

@@ -1,123 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link
-			type="text/css"
-			rel="stylesheet"
-			href="{{ url_for('static', filename='css/styles.css') }}"
-		/>
-		<title>Bike - Home</title>
-	</head>
-	<body>
-		<navbar>
-			<div id="navbar-container">
-				<img
-					id="navbar-logo"
-					src="static/css/images/logo.svg"
-					alt="Company Logo"
-				/>
-				<div id="middle-navbar">
-					<a
-						href="{{ url_for('renderIndex') }}"
-						class="navbar-item middle-navbar-item"
-						>Home</a
-					>
-					<a
-						href="{{ url_for('renderShop') }}"
-						class="navbar-item middle-navbar-item"
-						>Shop</a
-					>
-				</div>
-				<div id="right-navbar">
-					<a
-						href="{{ url_for('renderLogin') }}"
-						class="navbar-item right-navbar-item"
-						>Login</a
-					>
-					<a
-						href="{{ url_for('renderRegister') }}"
-						class="navbar-item right-navbar-item"
-						>Sign Up</a
-					>
-					<a
-						href="{{ url_for('renderShop') }}"
-						class="navbar-item right-navbar-item"
-						><ion-icon name="bag-outline"></ion-icon
-					></a>
-				</div>
-			</div>
-		</navbar>
-		<section id="hero">
-			<div id="hero-container">
-				<div id="hero-fade">
-					<h1 id="hero-text-one">Premium bikes</h1>
-					<h2 id="hero-text-two">for a premium experience.</h2>
-				</div>
-			</div>
-		</section>
-		<section id="home-description">
-			<h1 id="desc-header">The Best Bike Shop</h1>
-			<hr />
-			<p id="desc-content">
-				Bike is your one stop destination for bicycles. We’ve consistently
-				received the highest ratings on customer service and product selection.
-				We specialize in bikes. From road bikes to
-				mountain bikes, we have you covered whether you’re a
-				pro or a beginner. We strive to be your local bike shop of choice.
-			</p>
-			<a href="{{ url_for('renderShop') }}" id="home-shop-btn"> See Our Shop</a>
-		</section>
-		<section id="bike-types">
-			<div id="content-container">
-				<div class="bike-styles">
-					<img class="home-images" src="static/css/images/mountainbike.jpg" />
-					<div class="bike-type-content">
-						<h3>Mountain Bikes</h3>
-						<hr />
-						<p>
-							Variety of terrain and evolution of technology have opened a world
-							of possibilities for today’s off-road riders, and Bike has a bike
-							for everyone—from lightweight hardtails to radical suspension
-							technology. Whether you prefer casual cruising, aggressive trail
-							riding, or performance-oriented racing, there’s a bike to help you
-							find adventure around every turn, over every crest and down every
-							path.
-						</p>
-					</div>
-				</div>
-				<hr id="content-devider" />
-				<div class="bike-styles">
-					<div class="bike-type-content">
-						<h3>Street Bikes</h3>
-						<hr />
-						<p>
-							The world’s best bikes come only from the world’s best bicycle
-							company. Every Bike is built to enhance the quality of your ride,
-							and every model is backed by our history of performance,
-							durability, and precision engineering. Find your next great ride
-							here from our comprehensive offering of trail-shredding mountain
-							bikes, lightning-quick road bikes, and stylish city bikes.
-						</p>
-					</div>
-					<img class="home-images" src="static/css/images/citybike.jpg" />
-				</div>
-			</div>
-		</section>
-		<section id="footer">
-			<a href="{{ url_for('renderIndex') }}" class="footer-link">Home</a>
-			<a href="{{ url_for('renderShop') }}" class="footer-link">Shop</a>
-			<a href="{{ url_for('renderLogin') }}" class="footer-link">Login</a>
-		</section>
-		<script
-			type="module"
-			src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
-		></script>
-		<script
-			nomodule
-			src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
-		></script>
-	</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            type="text/css"
+            rel="stylesheet"
+            href="{{ url_for('static', filename='css/styles.css') }}"
+        />
+        <title>Bike - Home</title>
+    </head>
+    <body>
+        <navbar>
+            <div id="navbar-container">
+                <img
+                    id="navbar-logo"
+                    src="static/css/images/logo.svg"
+                    alt="Company Logo"
+                />
+                <div id="middle-navbar">
+                    <a
+                        href="{{ url_for('renderIndex') }}"
+                        class="navbar-item middle-navbar-item"
+                        >Home</a
+                    >
+                    <a
+                        href="{{ url_for('renderShop') }}"
+                        class="navbar-item middle-navbar-item"
+                        >Shop</a
+                    >
+                </div>
+                <div id="right-navbar">
+                    <a
+                        href="{{ url_for('renderLogin') }}"
+                        class="navbar-item right-navbar-item"
+                        >Login</a
+                    >
+                    <a
+                        href="{{ url_for('renderRegister') }}"
+                        class="navbar-item right-navbar-item"
+                        >Sign Up</a
+                    >
+                    <a
+                        href="{{ url_for('renderShop') }}"
+                        class="navbar-item right-navbar-item"
+                        ><ion-icon name="bag-outline"></ion-icon
+                    ></a>
+                    <a
+                        href="{{url_for('logOut')}}"
+                        class="navbar-item right-navbar-item"
+                        >Log Out</a
+                    >
+                </div>
+            </div>
+        </navbar>
+        <section id="hero">
+            <div id="hero-container">
+                <div id="hero-fade">
+                    <h1 id="hero-text-one">Premium bikes</h1>
+                    <h2 id="hero-text-two">for a premium experience.</h2>
+                </div>
+            </div>
+        </section>
+        <section id="home-description">
+            <h1 id="desc-header">The Best Bike Shop</h1>
+            <hr />
+            <p id="desc-content">
+                Bike is your one stop destination for bicycles. We’ve
+                consistently received the highest ratings on customer service
+                and product selection. We specialize in bikes. From road bikes
+                to mountain bikes, we have you covered whether you’re a pro or a
+                beginner. We strive to be your local bike shop of choice.
+            </p>
+            <a href="{{ url_for('renderShop') }}" id="home-shop-btn">
+                See Our Shop</a
+            >
+        </section>
+        <section id="bike-types">
+            <div id="content-container">
+                <div class="bike-styles">
+                    <img
+                        class="home-images"
+                        src="static/css/images/mountainbike.jpg"
+                    />
+                    <div class="bike-type-content">
+                        <h3>Mountain Bikes</h3>
+                        <hr />
+                        <p>
+                            Variety of terrain and evolution of technology have
+                            opened a world of possibilities for today’s off-road
+                            riders, and Bike has a bike for everyone—from
+                            lightweight hardtails to radical suspension
+                            technology. Whether you prefer casual cruising,
+                            aggressive trail riding, or performance-oriented
+                            racing, there’s a bike to help you find adventure
+                            around every turn, over every crest and down every
+                            path.
+                        </p>
+                    </div>
+                </div>
+                <hr id="content-devider" />
+                <div class="bike-styles">
+                    <div class="bike-type-content">
+                        <h3>Street Bikes</h3>
+                        <hr />
+                        <p>
+                            The world’s best bikes come only from the world’s
+                            best bicycle company. Every Bike is built to enhance
+                            the quality of your ride, and every model is backed
+                            by our history of performance, durability, and
+                            precision engineering. Find your next great ride
+                            here from our comprehensive offering of
+                            trail-shredding mountain bikes, lightning-quick road
+                            bikes, and stylish city bikes.
+                        </p>
+                    </div>
+                    <img
+                        class="home-images"
+                        src="static/css/images/citybike.jpg"
+                    />
+                </div>
+            </div>
+        </section>
+        <section id="footer">
+            <a href="{{ url_for('renderIndex') }}" class="footer-link">Home</a>
+            <a href="{{ url_for('renderShop') }}" class="footer-link">Shop</a>
+            <a href="{{ url_for('renderLogin') }}" class="footer-link">Login</a>
+        </section>
+        <script
+            type="module"
+            src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+        ></script>
+        <script
+            nomodule
+            src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+        ></script>
+    </body>
 </html>

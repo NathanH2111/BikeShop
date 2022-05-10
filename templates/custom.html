@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Bike - Custom Order</title>
+   <link
+   type="text/css"
+   rel="stylesheet"
+   href="{{ url_for('static', filename='css/custom.css') }}"
+   />
+
+</head>
+<body>
+   <navbar>
+      <div id="navbar-container">
+         <img
+            id="navbar-logo"
+            src="static/css/images/logo.svg"
+            alt="Company Logo"
+         />
+         <div id="middle-navbar">
+            <a
+               href="{{ url_for('renderIndex') }}"
+               class="navbar-item middle-navbar-item"
+               >Home</a
+            >
+            <a
+               href="{{ url_for('renderShop') }}"
+               class="navbar-item middle-navbar-item"
+               >Shop</a
+            >
+         </div>
+         <div id="right-navbar">
+            <a
+               href="{{ url_for('renderLogin') }}"
+               class="navbar-item right-navbar-item"
+               >Login</a
+            >
+            <a
+               href="{{ url_for('renderRegister') }}"
+               class="navbar-item right-navbar-item"
+               >Sign Up</a
+            >
+            <a
+               href="{{ url_for('renderShop') }}"
+               class="navbar-item right-navbar-item"
+               ><ion-icon name="bag-outline"></ion-icon
+            ></a>
+         </div>
+      </div>
+   </navbar>
+   <section id="custom-order-form">
+      <form action="{{ url_for('purchaseBike') }}" method="POST" id="custom-form">
+         <select name="type" id="bike-type">
+            <option value="mountain">Mountain Bike</option>
+            <option value="street">Street Bike</option>
+         </select>
+         <select name="gears" id="gears">
+            <option value="1">1</option>
+            <option value="3">3</option>
+            <option value="16">18</option>
+            <option value="21">21</option>
+            <option value="24">24</option>
+            <option value="27">27</option>
+            <option value="69">69</option>
+         </select>
+         <select name="tire-size" id="tire-size">
+            <option value="16">16</option>
+            <option value="20">20</option>
+            <option value="24">24</option>
+            <option value="26">26</option>
+            <option value="27">27</option>
+            <option value="27.5">27.5</option>
+            <option value="29">29</option>
+            <option value="32">32</option>
+            <option value="420">420</option>
+         </select>
+         <input type="color" name="bike-color" id="bike-color">
+         <input type="text" name="ccn" id="ccn" placeholder="Card Number">
+         <input type="text" name="cvv" placeholder="CVV">
+         <input type="submit" value="Submit">
+      </form>
+   </section>
+   <p id="error">{{error}}</p>
+</body>
+</html>

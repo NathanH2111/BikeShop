@@ -9,6 +9,9 @@
 </head>
 <body>
    		<navbar>
+            <div id="navbar-container">
+				<p>user: {{idcode}}</p>
+                </div>
 			<div id="navbar-container">
 				<img
 					id="navbar-logo"
@@ -43,6 +46,10 @@
 						class="navbar-item right-navbar-item"
 						><ion-icon name="bag-outline"></ion-icon
 					></a>
+                    <a
+                    href="{{url_for('logOut')}}"
+                    class="navbar-item right-navbar-item"
+                    >Log Out</a>
 				</div>
 			</div>
 		</navbar>
@@ -89,7 +96,7 @@
     <br/>
     <section class = delete >
         <h2>Remove Bikes</h2>
-        <form name = 'delete' action="{{url_for('addBikes')}}" class = 'delete' method = 'POST'>
+        <form name = 'delete' action="{{url_for('addBikes')}}"   method = 'POST'>
         <select name = bikes>
         {%for bike in bikes%}
             <option value ="{{bike[0]}}">{{bike[0]}}</option>
