@@ -51,10 +51,8 @@ def addBikes():
       if file.filename == '':
          return render_template('admin.html')
       if file and allowed_file(file.filename):
-         print(file.filename)
          filename = secure_filename(file.filename)
          file.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
-         print('upload_image filename: ' + filename)
          con = data.connect()
          cur = con.cursor()
          cur.execute('INSERT INTO  bikestock (name,type,price,image,description) VALUES(%s,%s,%s,%s,%s)',(f'{name}',f'{type}',f'{price}',f'{filename}',f'{desc}'))
@@ -68,17 +66,15 @@ def addBikes():
 
 #proccess a bike deletion
    if 'delete' in request.form:
-      con = data.connect() 
+      con = data.connect()
       cur = con.cursor()
       name = request.form.get('bikes')
-      print(name)
       cur.execute('DELETE FROM bikestock WHERE name = %s;',(f"{name}",))
       con.commit()
       cur.close()
       con.close()
       return redirect(url_for('admin'))
 
-   print('Error')
    return redirect(url_for('admin'))
 
 @app.route("/")
@@ -102,9 +98,7 @@ def mngrAuth():
 
    if not users:return render_template('Login.html',error='Incorrect Username or Password') # return error if username is incorrect or does not exist.
 
-   print(users)
    tmpPwr = bytes(users[0][2])
-   print(tmpPwr)
    
    if bcrypt.checkpw(pwr,tmpPwr) and users[0][1] == 'A': # check if password is correct and that the user is an administrator
       con = data.connect()
@@ -165,7 +159,6 @@ def register_register():
       cur.execute('SELECT email from users WHERE email = %s',(f"{eml}",))
       check = cur.fetchall()
 
-      print(check)
 
       if pwr == None:return render_template('Register.html',error=' please input a password')
 
@@ -187,8 +180,11 @@ def register_register():
 
 @app.route("/shop")
 def renderShop():
-   # if cusr == '':return render_template('login.html',error='Please Log in To your Account')
-   return render_template('shop.html') # render the shop template
+   conn = data.connect()
+   cur = conn.cursor()
+   cur.execute("SELECT * FROM bikestock")
+   bikes = cur.fetchall()
+   return render_template('shop.html', bikestock = bikes) # render the shop template
 @app.route("/logout")
 def renderLogout():
    global cusr
@@ -198,26 +194,24 @@ def renderLogout():
 def logOut():
    global cusr
    cusr = ''
-   print(cusr)
    return redirect(url_for('renderLogin'))
 
-@app.route("/custom")
+@app.route("/custom", methods=["GET", "POST"])
 def renderCustom():
    return render_template('custom.html')
 
-@app.route("/custom", methods=["GET", "POST"])
-def purchaseBike():
-   if request.method == "POST":
-      bike_style = request.form.get("type")
-      gears = request.form.get("gears")
-      tire_size = request.form.get("tire-size")
-      color = request.form.get("bike-color")
-      ccn = request.form.get("ccn")
-      cvv = request.form.get("cvv")
+# @app.route("/custom", methods=["GET", "POST"])
+# def purchaseBike():
+#    if request.method == "POST":
+#       bike_style = request.form.get("type")
+#       gears = request.form.get("gears")
+#       tire_size = request.form.get("tire-size")
+#       color = request.form.get("bike-color")
+#       ccn = request.form.get("ccn")
+#       cvv = request.form.get("cvv")
 
-      print(bike_style, gears, tire_size, color, ccn, cvv)
       
-      return redirect(url_for('renderIndex'))
+#       return redirect(url_for('renderIndex'))
 
    # con = data.connect()
    # cur = con.cursor()

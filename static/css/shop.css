@@ -98,4 +98,34 @@ navbar {
     margin-top: 1vw;
 }
 
+.item-name {
+    margin-bottom: 1vh;
+}
+
+.item-price {
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+}
+
+.item-btn {
+    display: flex;
+    justify-content: center;
+}
+
+.buy-btn {
+    background-color: #000000;
+    color: white;
+    border: 1px solid #000000;
+    border-radius: 10px;
+    width: 30%;
+    font: bold 1vw sans-serif;
+    padding-top: 0.5vh;
+    padding-bottom: 0.5vh;
+}
+
+.buy-btn:hover {
+    background: #1b1b1b;
+    border-color: #1b1b1b;
+}
+
 /* *End Shop Styling */

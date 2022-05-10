@@ -10,7 +10,7 @@
             rel="stylesheet"
             href="{{url_for('static',filename='css/register.css')}}"
         />
-        <title>Document</title>
+        <title>Register</title>
     </head>
     <body>
         <navbar>
@@ -76,7 +76,7 @@
                     placeholder="Enter your password"
                     required
                 />
-                <meter min="1" max="4" id="password-strength-meter"></meter>
+                <meter min="0" max="4" id="password-strength-meter"></meter>
                 <p id="password-strength-text"></p>
 
                 <br />
@@ -112,10 +112,10 @@
                 var result = zxcvbn(val);
                 // Update the password strength meter
                 meter.value = result.score;
-                console.log(meter.value);
                 // Update the text indicator
                 if (val !== '') {
                     text.innerHTML = 'Strength: ' + strength[result.score];
+                    console.log(strength)
                 } else {
                     text.innerHTML = '';
                 }
