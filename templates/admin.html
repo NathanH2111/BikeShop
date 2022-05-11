@@ -90,6 +90,7 @@
             </label>
             
             <input type="submit" name = add value ='ADD BIKE'>
+            <h3>{{error}}</h3>
         </form>
     </section>
     <br/>
@@ -106,6 +107,12 @@
         </form>
     </section>
     </section>
-    
+    <script>
+        if ('{{error}}' != ''){
+            
+            alert('{{error}}')
+        }
+        
+    </script>
 </body>
 </html>
