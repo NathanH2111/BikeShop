@@ -34,7 +34,9 @@ def admin():
       cur = con.cursor()
       cur.execute('SELECT * FROM bikestock')
       dat = cur.fetchall()
-      return render_template('admin.html',bikes = dat,idcode=cusr )
+      cur.close()
+      con.close()
+      return render_template('admin.html',bikes = dat,idcode=cusr,error = '' )
 
 @app.route('/administrator',methods=['POST','GET'])
 def addBikes():
@@ -49,7 +51,13 @@ def addBikes():
          return render_template('admin.html')
       file = request.files['file']
       if file.filename == '':
-         return render_template('admin.html')
+         con = data.connect()
+         cur = con.cursor()
+         cur.execute('SELECT * FROM bikestock')
+         dat = cur.fetchall()
+         cur.close()
+         con.close()
+         return render_template('admin.html',bikes=dat,error='No filename',idcode =cusr)
       if file and allowed_file(file.filename):
          filename = secure_filename(file.filename)
          file.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
@@ -57,12 +65,20 @@ def addBikes():
          cur = con.cursor()
          cur.execute('INSERT INTO  bikestock (name,type,price,image,description) VALUES(%s,%s,%s,%s,%s)',(f'{name}',f'{type}',f'{price}',f'{filename}',f'{desc}'))
          con.commit()
-         cur.close() 
+         cur.execute('SELECT * FROM bikestock')
+         dat = cur.fetchall()
+         cur.close()
          con.close()
-         return redirect(url_for('admin'))
+         return render_template('admin.html',bikes=dat,error='Upload Sucessfull',idcode =cusr)
 
       else: 
-         return redirect(url_for('admin'))
+         con = data.connect()
+         cur = con.cursor()
+         cur.execute('SELECT * FROM bikestock')
+         dat = cur.fetchall()
+         cur.close()
+         con.close()
+         return render_template('admin.html',bikes=dat,error='Error Invalid file type',idcode =cusr)
 
 #proccess a bike deletion
    if 'delete' in request.form:
