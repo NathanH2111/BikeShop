@@ -166,21 +166,19 @@ def logOut():
 def renderCustom():
    return render_template('custom.html')
 
-# @app.route("/custom", methods=["GET", "POST"])
-# def purchaseBike():
-#    if request.method == "POST":
-#       bike_style = request.form.get("type")
-#       gears = request.form.get("gears")
-#       tire_size = request.form.get("tire-size")
-#       color = request.form.get("bike-color")
-#       ccn = request.form.get("ccn")
-#       cvv = request.form.get("cvv")
+@app.route("/custom", methods=["GET", "POST"])
+def purchaseBike():
+   if request.method == "POST":
+      bike_style = request.form.get("type")
+      gears = request.form.get("gears")
+      tire_size = request.form.get("tire-size")
+      color = request.form.get("bike-color")
+      ccn = request.form.get("ccn")
+      cvv = request.form.get("cvv")
+      return redirect(url_for('renderIndex'))
 
-      
-#       return redirect(url_for('renderIndex'))
-
-   # con = data.connect()
-   # cur = con.cursor()
-   # cur.execute("INSERT INTO bikessold (name,type,price,image,description,color,gears,rimsize,customer) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)", ())
+   con = data.connect()
+   cur = con.cursor()
+   cur.execute("INSERT INTO bikessold (name,type,price,image,description,color,gears,rimsize,customer) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)", ())
 
 if __name__ == '__main__':app.run(debug=True)
