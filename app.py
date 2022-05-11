@@ -80,40 +80,6 @@ def addBikes():
 @app.route("/")
 def renderIndex():return render_template('index.html')
 
-@app.route('/login/administrator') # login error for administrator registration
-def adminLogin():return render_template('login.html',error = 'please enter admin credentials')
-
-@app.route("/login/administrator",methods =['POST','GET']) #check if administrator auth to create a new admin is authentic
-def mngrAuth():
-   eml = request.form.get('nm')
-   pwr = request.form.get('pw')
-   pwr = pwr.encode('utf-8')
-
-   con = data.connect()
-   cur = con.cursor()
-   cur.execute("SELECT email,role, password,id FROM users WHERE email = %s",(f"{eml}",)) #check if the admin email adress exists
-   users = cur.fetchall()
-   cur.close()
-   con.close()
-
-   if not users:return render_template('Login.html',error='Incorrect Username or Password') # return error if username is incorrect or does not exist.
-
-   tmpPwr = bytes(users[0][2])
-   
-   if bcrypt.checkpw(pwr,tmpPwr) and users[0][1] == 'A': # check if password is correct and that the user is an administrator
-      con = data.connect()
-      cur = con.cursor()
-      cur.execute("INSERT INTO users (email,address,role,password) VALUES(%s,%s,%s,%s)",(tmpDta[0],tmpDta[1],'A',tmpDta[2]))#insert data to db for new user
-      con.commit()
-      cur.close()
-      con.close()
-      eml = ''
-      pwr = ''
-      
-      return redirect(url_for('renderLogin')) # redirect to login page
-
-   else:return redirect(url_for('renderRegister',error='Invalid code')) # return error if password is incorrect
-
 @app.route("/login")
 def renderLogin():return render_template('login.html',error = '') # render login template
    
