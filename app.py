@@ -168,11 +168,13 @@ def renderShop():
    cur.execute("SELECT * FROM bikestock")
    bikes = cur.fetchall()
    return render_template('shop.html', bikestock = bikes) # render the shop template
-@app.route("/logout")
+
+@app.route("/logout")#clear the cusr variable and redirect to the login page
 def renderLogout():
    global cusr
    cusr = ''
    return render_template('login.html')
+
 @app.route("/logout")
 def logOut():
    global cusr
