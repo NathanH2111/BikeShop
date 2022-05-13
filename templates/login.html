@@ -47,7 +47,7 @@
 		</navbar>
     <section>
         <div class="general">
-        <form class = form1 id="login" action = "http://localhost:5000/login" method = "POST">
+        <form class = form1 id="login" action = "{{url_for('loginFunc')}}" method = "POST">
 			<h1>Login</h1>
 			<br/>
             <br/>
@@ -59,7 +59,7 @@
             <br/>
             <button type="submit" value="submit">Login</button>
             <p>{{error}}</p>
-            <a href="http://localhost:5000/register">Need to register? click here</a>
+            <a href="{{url_for('renderRegister')}}">Need to register? click here</a>
             </form>
         </div>
     </section>
