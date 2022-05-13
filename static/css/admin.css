@@ -207,3 +207,6 @@ navbar {
 .item-text {
     margin-top: 1vw;
 }
+.item-desc{
+    word-wrap: break-word;
+}
