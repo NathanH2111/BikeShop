@@ -116,6 +116,7 @@ def loginFunc():
    print(users)
    tmpPwr = bytes(users[0][2])# convert pw to bytes
    print(tmpPwr)
+   print(bcrypt.checkpw(pwr,tmpPwr))
    if bcrypt.checkpw(pwr,tmpPwr):
       global cusr
       cusr = int(users[0][3])# save user code for later use
