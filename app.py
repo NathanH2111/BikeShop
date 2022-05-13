@@ -180,6 +180,7 @@ def logOut():
 
 @app.route("/custom", methods=["GET", "POST"])
 def renderCustom():
+   if not data.check_user(cusr): return render_template('login.html',error='Please log in before purchasing a bike')
    return render_template('custom.html')
 
 @app.route("/custom", methods=["GET", "POST"])

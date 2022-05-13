@@ -4,6 +4,7 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.2.0/zxcvbn.js"></script>
         <link rel="stylesheet" href="../static/css/register.css" />
         <link
@@ -56,6 +57,7 @@
                 class="form1"
                 method="post"
                 action="http://localhost:5000/register"
+                id="rgstr"
             >
             <h1>Register</h1>
             <br/>
@@ -88,6 +90,8 @@
         </div>
 
         <script>
+            $(document).ready(function () {
+
             var strength = {
                 0: 'Worst',
                 1: 'Bad',
@@ -111,6 +115,26 @@
                 } else {
                     text.innerHTML = '';
                 }
+            });
+            $form = $('#rgstr'); // cache
+                $form.find(':input[type="submit"]').prop('disabled', true); // disable submit btn
+                $form.find(':input').change(function () {
+                    // monitor all inputs for changes
+                    var disable = false;
+                    $form
+                        .find(':input')
+                        .not('[type="submit"]')
+                        .each(function (i, el) {
+                            // test all inputs for values
+                            if ($.trim(el.value) === '') {
+                                disable = true; // disable submit if any of them are still blank
+                            }
+                        });
+                    $form
+                        .find(':input[type="submit"]')
+                        .prop('disabled', disable);
+                });
+
             });
         </script>
     </body>
