@@ -6,7 +6,7 @@ import re
 import data
 from werkzeug.utils import secure_filename
 
-ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif','jfif','pjpeg','pjp','svg','webp','apng'])
 global cusr 
 cusr = ''
 def allowed_file(filename):
