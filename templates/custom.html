@@ -1,102 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.js"></script>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Bike - Custom Order</title>
-		<link
-			type="text/css"
-			rel="stylesheet"
-			href="{{ url_for('static', filename='css/custom.css') }}"
-		/>
-	</head>
-	<body>
-		<navbar>
-			<div id="navbar-container">
-				<img
-					id="navbar-logo"
-					src="static/css/images/logo.svg"
-					alt="Company Logo"
-				/>
-				<div id="middle-navbar">
-					<a
-						href="{{ url_for('renderIndex') }}"
-						class="navbar-item middle-navbar-item"
-						>Home</a
-					>
-					<a
-						href="{{ url_for('renderShop') }}"
-						class="navbar-item middle-navbar-item"
-						>Shop</a
-					>
-				</div>
-				<div id="right-navbar">
-					<a
-						href="{{ url_for('renderLogin') }}"
-						class="navbar-item right-navbar-item"
-						>Login</a
-					>
-					<a
-						href="{{ url_for('renderRegister') }}"
-						class="navbar-item right-navbar-item"
-						>Sign Up</a
-					>
-					<a
-						href="{{ url_for('renderShop') }}"
-						class="navbar-item right-navbar-item"
-						><ion-icon name="bag-outline"></ion-icon
-					></a>
-				</div>
-			</div>
-		</navbar>
-		<section id="custom-order-form">
-			<form
-				action="{{ url_for('purchaseBike') }}"
-				method="POST"
-				id="custom-form"
-			>
-				<label for="type">bike type</label>
-				<select name="type" id="bike-type">
-					<option value="mountain">Mountain Bike</option>
-					<option value="street">Street Bike</option>
-				</select>
-				<label for="gears">gears</label>
-				<select name="gears" id="gears">
-					<option value="1">1</option>
-					<option value="3">3</option>
-					<option value="16">18</option>
-					<option value="21">21</option>
-					<option value="24">24</option>
-					<option value="27">27</option>
-					<option value="69">69</option>
-				</select>
-				<label for="tire-size">Tire Size</label>
-				<select name="tire-size" id="tire-size">
-					<option value="16">16</option>
-					<option value="20">20</option>
-					<option value="24">24</option>
-					<option value="26">26</option>
-					<option value="27">27</option>
-					<option value="27.5">27.5</option>
-					<option value="29">29</option>
-					<option value="32">32</option>
-					<option value="420">420</option>
-				</select>
-				<label for="bike-color">color</label>
-				<input type="color" name="bike-color" id="bike-color" />
-				<input class="card_Num" type="tel" pattern="\d*" maxlength="19"name="ccn" id="ccn" placeholder="Card Number" />
-				<input type="tel" maxlength="3" name="cvv" placeholder="CVV" />
-				<input type="submit" value="Submit" />
-			</form>
-		</section>
-		<p id="error">{{error}}</p>
-		<script>
-				
-				$('#ccn').mask("9999-9999-9999-9999");
+    <head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.js"></script>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Bike - Custom Order</title>
+        <link
+            type="text/css"
+            rel="stylesheet"
+            href="{{ url_for('static', filename='css/custom.css') }}"
+        />
+    </head>
+    <body>
+        <navbar>
+            <div id="navbar-container">
+                <img
+                    id="navbar-logo"
+                    src="static/css/images/logo.svg"
+                    alt="Company Logo"
+                />
+                <div id="middle-navbar">
+                    <a
+                        href="{{ url_for('renderIndex') }}"
+                        class="navbar-item middle-navbar-item"
+                        >Home</a
+                    >
+                    <a
+                        href="{{ url_for('renderShop') }}"
+                        class="navbar-item middle-navbar-item"
+                        >Shop</a
+                    >
+                </div>
+                <div id="right-navbar">
+                    <a
+                        href="{{ url_for('renderLogin') }}"
+                        class="navbar-item right-navbar-item"
+                        >Login</a
+                    >
+                    <a
+                        href="{{ url_for('renderRegister') }}"
+                        class="navbar-item right-navbar-item"
+                        >Sign Up</a
+                    >
+                    <a
+                        href="{{ url_for('renderShop') }}"
+                        class="navbar-item right-navbar-item"
+                        ><ion-icon name="bag-outline"></ion-icon
+                    ></a>
+                </div>
+            </div>
+        </navbar>
+        <section id="custom-order-form">
+            <form
+                action="{{ url_for('purchaseBike') }}"
+                method="POST"
+                id="custom-form"
+            >
+                <label for="type">bike type</label>
+                <select name="type" id="bike-type">
+                    <option value="mountain">Mountain Bike</option>
+                    <option value="street">Street Bike</option>
+                </select>
+                <label for="gears">gears</label>
+                <select name="gears" id="gears">
+                    <option value="1">1</option>
+                    <option value="3">3</option>
+                    <option value="16">18</option>
+                    <option value="21">21</option>
+                    <option value="24">24</option>
+                    <option value="27">27</option>
+                    <option value="69">69</option>
+                </select>
+                <label for="tire-size">Tire Size</label>
+                <select name="tire-size" id="tire-size">
+                    <option value="16">16</option>
+                    <option value="20">20</option>
+                    <option value="24">24</option>
+                    <option value="26">26</option>
+                    <option value="27">27</option>
+                    <option value="27.5">27.5</option>
+                    <option value="29">29</option>
+                    <option value="32">32</option>
+                    <option value="420">420</option>
+                </select>
+                <label for="bike-color">color</label>
+                <input type="color" name="bike-color" id="bike-color" />
+                <input
+                    class="card_Num"
+                    type="tel"
+                    pattern="\d*"
+                    maxlength="19"
+                    name="ccn"
+                    id="ccn"
+                    placeholder="Card Number"
+                />
+                <input type="tel" maxlength="3" name="cvv" placeholder="CVV" />
+                <input type="submit" value="Submit" />
+            </form>
+        </section>
+        <p id="error">{{error}}</p>
+        <script>
+            $(document).ready(function () {
+                $('#ccn').mask('9999-9999-9999-9999');
 
-		</script>
-	</body>
+                $form = $('#custom-form'); // cache
+                $form.find(':input[type="submit"]').prop('disabled', true); // disable submit btn
+                $form.find(':input').change(function () {
+                    // monitor all inputs for changes
+                    var disable = false;
+                    $form
+                        .find(':input')
+                        .not('[type="submit"]')
+                        .each(function (i, el) {
+                            // test all inputs for values
+                            if ($.trim(el.value) === '') {
+                                disable = true; // disable submit if any of them are still blank
+                            }
+                        });
+                    $form
+                        .find(':input[type="submit"]')
+                        .prop('disabled', disable);
+                });
+            });
+        </script>
+    </body>
 </html>
