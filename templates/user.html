@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link type="text/css" rel="stylesheet" href="{{url_for('static',filename='css/admin.css')}}">
-    <title>Administrator</title>
+    <link type="text/css" rel="stylesheet" href="{{url_for('static',filename='css/users.css')}}">
+    <title>Bikes Purchased</title>
+
 </head>
 <body>
-   		<navbar>
+    	<navbar>
             <div id="navbar-container">
-				<p>user: {{idcode}}</p>
                 </div>
 			<div id="navbar-container">
 				<img
@@ -47,6 +47,10 @@
 						><ion-icon name="bag-outline"></ion-icon
 					></a>
                     <a
+						href="{{ url_for('renderUsers') }}"
+						class="navbar-item right-navbar-item"
+					>My Bikes</a>
+                    <a
                     href="{{url_for('logOut')}}"
                     class="navbar-item right-navbar-item"
                     >Log Out</a>
@@ -69,43 +73,7 @@
             {%endfor%}
         </div>
     </section>
-    <section class = functions>
-    <section class = upload>
-        <h2>Add Bikes</h2>
-        <form class = newbikes enctype=multipart/form-data action = "{{url_for('addBikes')}}" method = 'POST'>
-            <input type = text name = name placeholder ='Input bike name'>
-            <br/>
-            <select name = type>
-                <option value ='Mountain'>Mountain</option>
-                <option value = 'Street'>Street</option>
-            </select>
-            <input type="tel" name = price = price placeholder =price>
-            <br/>
-            <input type="text" name ='description' placeholder ='Description'>
-            <label class =custom-file-upload>
-                Drag Image Here Or Click To Select
-            <input type = file name = 'file' class = filesupload>
-            </label>
-            
-            <input type="submit" name = add value ='ADD BIKE'>
-            <h3>{{error}}</h3>
-        </form>
-    </section>
-    <br/>
-    <br/>
-    <section class = delete >
-        <h2>Remove Bikes</h2>
-        <form name = 'delete' action="{{url_for('addBikes')}}"   method = 'POST'>
-        <select name = bikes>
-        {%for bike in bikes%}
-            <option value ="{{bike[0]}}">{{bike[0]}}</option>
-        {% endfor %}
-        </select> 
-        <input type="submit" name="delete" value="DELETE BIKE"></input>
-        </form>
-    </section>
-    </section>
-        <script
+         <script
             type="module"
             src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
         ></script>
@@ -113,11 +81,5 @@
             nomodule
             src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
         ></script>
-    <script type="text/javascript">
-        if ('{{error}}' != '') {
-    alert('{{error}}');
-}
-    </script>
 </body>
-
 </html>
