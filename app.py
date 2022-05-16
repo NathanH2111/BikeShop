@@ -94,11 +94,18 @@ def addBikes():
    return redirect(url_for('admin'))
 
 @app.route("/")
-def renderIndex():return render_template('index.html')
+def renderIndex():
+   if data.check_user(cusr) and not data.check_admin(cusr):
+      return render_template('index.html',admin='hidden',logout = 'visible')
+   elif data.check_admin(cusr):
+      return render_template('index.html',admin='visible',logout='visible')
+   else:
+      return render_template('index.html',admin='hidden',logout = 'hidden')
+  
+   
 
 @app.route("/login")
 def renderLogin():return render_template('login.html',error = '') # render login template
-   
 @app.route('/login',methods = ['POST','GET'])
 def loginFunc():
    eml = request.form.get('nm')
@@ -167,7 +174,19 @@ def renderShop():
    cur = conn.cursor()
    cur.execute("SELECT * FROM bikestock")
    bikes = cur.fetchall()
-   return render_template('shop.html', bikestock = bikes) # render the shop template
+   if data.check_user(cusr) and not data.check_admin(cusr):
+      print(1)
+      return render_template('shop.html',admin='hidden',logout = 'visible',bikestock = bikes)
+   elif data.check_admin(cusr):
+      print(2)
+      return render_template('shop.html',admin='visible',logout='visible',bikestock = bikes)
+   else:
+      print(3)
+      return render_template('shop.html',admin='hidden',logout = 'hidden',bikestock = bikes)
+
+   # if not data.check_user(cusr):return render_template('shop.html',bikestock = bikes,logout = 'hidden',admin='hidden')
+   # elif data.check_admin(cusr):return render_template('shop.html',bikestock = bikes,logout = 'hidden',admin='visible')
+   # return render_template('shop.html', bikestock = bikes,logout = 'visible',admin='hidden') # render the shop template
 
 @app.route("/shop", methods = ["GET", "POST"])
 def buyBike():
