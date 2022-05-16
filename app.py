@@ -192,6 +192,7 @@ def renderShop():
 def buyBike():
    if request.method == "POST":
       selected_bike = request.form.get("submitBtn")
+      print(selected_bike)
       conn = data.connect()
       cur = conn.cursor()
       cur.execute("SELECT * FROM bikestock WHERE name = %s", (f"{selected_bike}",))
@@ -234,7 +235,7 @@ def purchaseBike():
    if request.method == "POST":
       bike_style = request.form.get("type")
       gears = request.form.get("gears")
-      tire_size = request.form.get("tire-size")
+      tire_size = float(request.form.get("tire-size"))
       color = request.form.get("bike-color")
       ccn = request.form.get("ccn")
       cvv = request.form.get("cvv")
