@@ -8,51 +8,53 @@
     <title>Administrator</title>
 </head>
 <body>
-   		<navbar>
+<navbar>
             <div id="navbar-container">
-				<p>user: {{idcode}}</p>
-                </div>
-			<div id="navbar-container">
-				<img
-					id="navbar-logo"
-					src="static/css/images/logo.svg"
-					alt="Company Logo"
-				/>
-				<div id="middle-navbar">
-					<a
-						href="{{ url_for('renderIndex') }}"
-						class="navbar-item middle-navbar-item"
-						>Home</a
-					>
-					<a
-						href="{{ url_for('renderShop') }}"
-						class="navbar-item middle-navbar-item"
-						>Shop</a
-					>
-				</div>
-				<div id="right-navbar">
-					<a
-						href="{{ url_for('renderLogin') }}"
-						class="navbar-item right-navbar-item"
-						>Login</a
-					>
-					<a
-						href="{{ url_for('renderRegister') }}"
-						class="navbar-item right-navbar-item"
-						>Sign Up</a
-					>
-					<a
-						href="{{ url_for('renderShop') }}"
-						class="navbar-item right-navbar-item"
-						><ion-icon name="bag-outline"></ion-icon
-					></a>
+                <img
+                    id="navbar-logo"
+                    src="static/css/images/logo.svg"
+                    alt="Company Logo"
+                />
+                <div id="middle-navbar">
                     <a
-                    href="{{url_for('logOut')}}"
-                    class="navbar-item right-navbar-item"
-                    >Log Out</a>
-				</div>
-			</div>
-		</navbar>
+                        href="{{ url_for('renderIndex') }}"
+                        class="navbar-item middle-navbar-item"
+                        >Home</a
+                    >
+                    <a
+                        href="{{ url_for('renderShop') }}"
+                        class="navbar-item middle-navbar-item"
+                        >Shop</a
+                    >
+                </div>
+                <div id="right-navbar">
+                    <a
+                        href="{{ url_for('renderLogin') }}"
+                        class="navbar-item right-navbar-item"
+                        >Login</a
+                    >
+                    <a
+                        href="{{ url_for('renderRegister') }}"
+                        class="navbar-item right-navbar-item"
+                        >Sign Up</a
+                    >
+                    <a
+                        href="{{ url_for('renderShop') }}"
+                        class="navbar-item right-navbar-item"
+                        ><ion-icon name="bag-outline"></ion-icon
+                    ></a>
+                       <a
+						href="{{ url_for('renderUsers') }}"
+						class="navbar-item right-navbar-item"
+					>My Bikes</a>
+                    <a
+                        href="{{url_for('logOut')}}"
+                        class="navbar-item right-navbar-item" style="visibility:visible"
+                        >Log Out</a
+                    >
+                </div>
+            </div>
+        </navbar>
     <section id =shop>
         <div class="shop-container">
 
