@@ -176,6 +176,14 @@ def buyBike():
       print(bikeName)
       return redirect(url_for("renderCustom"))
 
+@app.route("/users")
+def renderUsers():
+   if not data.check_user(cusr):return render_template('login.html',error='Please log in to continue to Your Bikes')
+   con = data.connect()
+   cur = con.cursor()
+   cur.execute("SELECT * FROM bikesold WHERE customer = %s",(cusr,))
+   dat = cur.fetchall()
+   return render_template('user.html',bikes =dat)
 
 @app.route("/logout")#clear the cusr variable and redirect to the login page
 def renderLogout():
