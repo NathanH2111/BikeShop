@@ -21,7 +21,7 @@
                     src="static/css/images/logo.svg"
                     alt="Company Logo"
                 />
-                <div id="middle-navbar">
+                <div id="right-navbar">
                     <a
                         href="{{ url_for('renderIndex') }}"
                         class="navbar-item middle-navbar-item"
@@ -32,8 +32,6 @@
                         class="navbar-item middle-navbar-item"
                         >Shop</a
                     >
-                </div>
-                <div id="right-navbar">
                     <a
                         href="{{ url_for('renderLogin') }}"
                         class="navbar-item right-navbar-item"
@@ -44,17 +42,23 @@
                         class="navbar-item right-navbar-item"
                         >Sign Up</a
                     >
+                       <a
+						href="{{ url_for('renderUsers') }}"
+						class="navbar-item right-navbar-item"
+                        style="display:{{logout}}"
+					>My Bikes</a>
                     <a
-                        href="{{ url_for('renderShop') }}"
-                        class="navbar-item right-navbar-item"
-                        ><ion-icon name="bag-outline"></ion-icon
-                    ></a>
+						href="{{ url_for('admin') }}"
+						class="navbar-item right-navbar-item"
+                        style="display:{{admin}}">Admin</a>
+                    <a
+                        href="{{url_for('logOut')}}"
+                        class="navbar-item right-navbar-item" style="display:{{logout}}"
+                        >Log Out</a
+                    >
                 </div>
             </div>
         </navbar>
-        <p>{{name}}</p>
-        <p>{{price}}</p>
-        <p>{{desc}}</p>
         <section id="custom-order-form">
             <form
                 action="{{ url_for('purchaseBike') }}"

@@ -15,37 +15,35 @@ body {
 /* *Navbar Styling */
 
 navbar {
-	width: 100%;
-	margin-bottom: 5vw;
+    width: 100%;
+    margin-bottom: 5vw;
 }
 
 #navbar-logo {
-	width: 3vw;
-}
-
-#middle-navbar {
-	width: 10%;
-	display: flex;
-	justify-content: space-around;
+    margin-left: 2%;
+    width: 3vw;
 }
 
 #right-navbar {
-	width: 10%;
-	display: flex;
-	justify-content: space-around;
+    display: flex;
+    justify-content: space-between;
+    margin-right: 2%;
+    /* width: 20%; */
 }
 
 #navbar-container {
-	background-color: #ffffff;
-	width: 100%;
-	display: flex;
-	align-items: center;
+    background-color: #ffffff;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .navbar-item {
-	color: #000000;
-	float: left;
-	text-decoration: none;
+    margin-left: 2vw;
+    color: #000000;
+    float: left;
+    text-decoration: none;
 }
 
 /* *End Navbar Styling */
