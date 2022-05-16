@@ -169,6 +169,14 @@ def renderShop():
    bikes = cur.fetchall()
    return render_template('shop.html', bikestock = bikes) # render the shop template
 
+@app.route("/shop", methods = ["GET", "POST"])
+def buyBike():
+   if request.method == "POST":
+      bikeName = request.form.get("item-name")
+      print(bikeName)
+      return redirect(url_for("renderCustom"))
+
+
 @app.route("/logout")#clear the cusr variable and redirect to the login page
 def renderLogout():
    global cusr
