@@ -95,21 +95,27 @@ navbar {
 }
 
 .item-text {
-    margin-top: 5vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-around;
+    align-items:center;
+    width: 100%;
+    margin-top: 1vw;
 }
 
-.item-name {
+p.item-desc {
+    word-wrap: break-word;
+    width: 80%;
     margin-bottom: 1vh;
-}
+    height: 100%;
+    text-align: center;
 
-.item-price {
-    margin-top: 1vh;
-    margin-bottom: 1vh;
 }
 
 .item-btn {
     display: flex;
     justify-content: center;
+    width: 100%;
 }
 
 .buy-btn {

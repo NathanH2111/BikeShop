@@ -60,19 +60,19 @@
 		<section id="shop">
 			<div class="shop-container">
 				{% for item in bikestock %}
-				<div class="shop-item">
-					<form action="{{url_for ('renderCustom') }}" method="POST">
+				<form action="{{url_for ('buyBike') }}" method="POST">
+					<div class="shop-item">
 						<img class="item-img" src="static/uploads/{{item[3]}}" alt="Bike" />
 						<div class="item-text">
-							<p class="item-name">{{item[0]}}</p>
-							<p class="item-price">${{item[2]}}</p>
+							<input name="item-name" type="text" class="item-name" placeholder="{{item[0]}}" value="{{item[0]}}" disabled readonly></input>
+							<input name="item-price" type="text" class="item-price" placeholder="{{item[2]}}" value="{{item[2]}}"disabled readonly></input>
 							<p class="item-desc">{{item[4]}}</p>
 						</div>
                         <div class="item-btn">
-                            <input class="buy-btn" type="submit" value="Buy">
+                            <button class="buy-btn" type="submit" value="{{item[0]}}">Buy</button>
                         </div>
-					</form>
-				</div>
+					</div>
+				</form>
 				{% endfor %}
 			</div>
 		</section>

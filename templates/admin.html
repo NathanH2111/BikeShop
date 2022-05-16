@@ -59,13 +59,11 @@
             {%for bike in bikes %}
             <!-- <li><img src="static/uploads/{{bike[3]}}"><br/><div>{{bike[0]}}<br/> Price: $ {{bike[2]}}<br/></div></li> -->
             <div class="shop-item">
-            <img class="item-img" src="static/uploads/{{bike[3]}}" alt="Bike" />
+                <img class="item-img" src="static/uploads/{{bike[3]}}" alt="Bike" />
                 <div class="item-text">
                     <p class="item-name">{{bike[0]}}</p>
                     <p class="item-price">${{bike[2]}}</p>
-                    <p class="item-desc">
-                    {{bike[4]}}
-                    </p>
+                    <p class="item-desc">{{bike[4]}}</p>
                 </div>
             </div>
             {%endfor%}
