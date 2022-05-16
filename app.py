@@ -28,15 +28,17 @@ data.initialInsert() #Initialize DB tables if not exists
 #render Admin page and pass bike data to the page
 @app.route('/administrator')
 def admin():
-   if not data.check_admin(cusr):return render_template('login.html',error='Please Log in To your Account')
-   else:
-      con = data.connect()
-      cur = con.cursor()
-      cur.execute('SELECT * FROM bikestock')
-      dat = cur.fetchall()
-      cur.close()
-      con.close()
-      return render_template('admin.html',bikes = dat,idcode=cusr,error = '' )
+   con = data.connect()
+   cur = con.cursor()
+   cur.execute('SELECT * FROM bikestock')
+   dat = cur.fetchall()
+   cur.close()
+   con.close()
+   if data.check_user(cusr) and not data.check_admin(cusr):
+      return render_template('admin.html', bikes = dat, idcode = cusr, admin='none', logout = 'inline')
+   elif data.check_admin(cusr):
+      return render_template('admin.html', bikes = dat, idcode = cusr, admin='inline', logout='inline')
+   else: return render_template('admin.html',bikes = dat, idcode=cusr, error = '', admin = "none", logout = "none")
 
 @app.route('/administrator',methods=['POST','GET'])
 def addBikes():
@@ -96,13 +98,11 @@ def addBikes():
 @app.route("/")
 def renderIndex():
    if data.check_user(cusr) and not data.check_admin(cusr):
-      return render_template('index.html',admin='hidden',logout = 'visible')
+      return render_template('index.html', admin='none',logout = 'inline')
    elif data.check_admin(cusr):
-      return render_template('index.html',admin='visible',logout='visible')
+      return render_template('index.html', admin='inline',logout='inline')
    else:
-      return render_template('index.html',admin='hidden',logout = 'hidden')
-  
-   
+      return render_template('index.html', admin='none',logout = 'none')
 
 @app.route("/login")
 def renderLogin():return render_template('login.html',error = '') # render login template
@@ -175,14 +175,11 @@ def renderShop():
    cur.execute("SELECT * FROM bikestock")
    bikes = cur.fetchall()
    if data.check_user(cusr) and not data.check_admin(cusr):
-      print(1)
-      return render_template('shop.html',admin='hidden',logout = 'visible',bikestock = bikes)
+      return render_template('shop.html',admin='none',logout = 'inline',bikestock = bikes)
    elif data.check_admin(cusr):
-      print(2)
-      return render_template('shop.html',admin='visible',logout='visible',bikestock = bikes)
+      return render_template('shop.html',admin='inline',logout='inline',bikestock = bikes)
    else:
-      print(3)
-      return render_template('shop.html',admin='hidden',logout = 'hidden',bikestock = bikes)
+      return render_template('shop.html',admin='none',logout = 'none',bikestock = bikes)
 
    # if not data.check_user(cusr):return render_template('shop.html',bikestock = bikes,logout = 'hidden',admin='hidden')
    # elif data.check_admin(cusr):return render_template('shop.html',bikestock = bikes,logout = 'hidden',admin='visible')
@@ -211,7 +208,11 @@ def renderUsers():
    cur = con.cursor()
    cur.execute("SELECT * FROM bikesold WHERE customer = %s",(cusr,))
    dat = cur.fetchall()
-   return render_template('user.html',bikes =dat)
+   if data.check_user(cusr) and not data.check_admin(cusr):
+      return render_template('user.html',admin='none',logout = 'inline')
+   elif data.check_admin(cusr):
+      return render_template('user.html',admin='inline',logout='inline')
+   else: return render_template('user.html', bikes=dat, admin = "none", logout = "none")
 
 @app.route("/logout")#clear the cusr variable and redirect to the login page
 def renderLogout():

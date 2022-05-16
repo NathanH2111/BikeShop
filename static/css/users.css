@@ -7,29 +7,26 @@
 body{
     width:100%;
     height:80vh;
-    
+    background-color: #f5f5f5;
 }
 
 /* *Navbar Styling */
 
 navbar {
     width: 100%;
+    margin-bottom: 5vw;
 }
 
 #navbar-logo {
+    margin-left: 2%;
     width: 3vw;
 }
 
-#middle-navbar {
-    width: 20%;
-    display: flex;
-    justify-content: space-evenly;
-}
-
 #right-navbar {
-    width: 20%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    margin-right: 2%;
+    /* width: 20%; */
 }
 
 #navbar-container {
@@ -37,9 +34,12 @@ navbar {
     width: 100%;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    margin-bottom: 5vw;
 }
 
 .navbar-item {
+    margin-left: 2vw;
     color: #000000;
     float: left;
     text-decoration: none;
@@ -82,4 +82,32 @@ navbar {
     align-items:center;
     width: 100%;
     margin-top: 1vw;
+}
+
+p.item-desc {
+    word-wrap: break-word;
+    width: 80%;
+    margin-bottom: 1vh;
+    height: 100%;
+    text-align: center;
+
+}
+
+/* *End Navbar Styling */
+
+/* *Header Styling */
+
+#userHeader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 3vw;
+}
+
+#userHeader h1 {
+    font: bold 3vw sans-serif;
+}
+
+#userHeader hr {
+    width:50vw;
 }

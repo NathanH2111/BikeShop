@@ -19,7 +19,7 @@
                     src="static/css/images/logo.svg"
                     alt="Company Logo"
                 />
-                <div id="left-navbar">
+                <div id="right-navbar">
                     <a
                         href="{{ url_for('renderIndex') }}"
                         class="navbar-item middle-navbar-item"
@@ -40,23 +40,18 @@
                         class="navbar-item right-navbar-item"
                         >Sign Up</a
                     >
-                    <a
-                        href="{{ url_for('renderShop') }}"
-                        class="navbar-item right-navbar-item"
-                        ><ion-icon name="bag-outline"></ion-icon
-                    ></a>
                        <a
 						href="{{ url_for('renderUsers') }}"
 						class="navbar-item right-navbar-item"
-                        style="visibility:{{logout}}"
+                        style="display:{{logout}}"
 					>My Bikes</a>
                     <a
 						href="{{ url_for('admin') }}"
 						class="navbar-item right-navbar-item"
-                        style="visibility:{{admin}}">admin</a>
+                        style="display:{{admin}}">Admin</a>
                     <a
                         href="{{url_for('logOut')}}"
-                        class="navbar-item right-navbar-item" style="visibility:{{logout}}"
+                        class="navbar-item right-navbar-item" style="display:{{logout}}"
                         >Log Out</a
                     >
                 </div>
@@ -133,15 +128,6 @@
         <section id="footer">
             <a href="{{ url_for('renderIndex') }}" class="footer-link">Home</a>
             <a href="{{ url_for('renderShop') }}" class="footer-link">Shop</a>
-            <a href="{{ url_for('renderLogin') }}" class="footer-link">Login</a>
         </section>
-        <script
-            type="module"
-            src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
-        ></script>
-        <script
-            nomodule
-            src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
-        ></script>
     </body>
 </html>

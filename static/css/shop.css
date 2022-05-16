@@ -20,19 +20,15 @@ navbar {
 }
 
 #navbar-logo {
+    margin-left: 2%;
     width: 3vw;
 }
 
-#middle-navbar {
-    width: 20%;
-    display: flex;
-    justify-content: space-around;
-}
-
 #right-navbar {
-    width: 20%;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    margin-right: 2%;
+    /* width: 20%; */
 }
 
 #navbar-container {
@@ -40,9 +36,11 @@ navbar {
     width: 100%;
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
 .navbar-item {
+    margin-left: 2vw;
     color: #000000;
     float: left;
     text-decoration: none;
