@@ -172,8 +172,16 @@ def renderShop():
 @app.route("/shop", methods = ["GET", "POST"])
 def buyBike():
    if request.method == "POST":
-      bikeName = request.form.get("item-name")
-      print(bikeName)
+      selected_bike = request.form.get("submitBtn")
+      conn = data.connect()
+      cur = conn.cursor()
+      cur.execute("SELECT * FROM bikestock WHERE name = %s", (f"{selected_bike}",))
+      bike_data = cur.fetchall()
+      global bike_name, bike_price, bike_desc, bike_img
+      bike_img = bike_data[0][3]
+      bike_name = bike_data[0][0]
+      bike_price = bike_data[0][2]
+      bike_desc = bike_data[0][4]
       return redirect(url_for("renderCustom"))
 
 @app.route("/users")
@@ -197,7 +205,7 @@ def logOut():
    cusr = ''
    return redirect(url_for('renderLogin'))
 
-@app.route("/custom", methods=["GET", "POST"])
+@app.route("/custom")
 def renderCustom():
    if not data.check_user(cusr): return render_template('login.html',error='Please log in before purchasing a bike')
    return render_template('custom.html')
@@ -211,10 +219,15 @@ def purchaseBike():
       color = request.form.get("bike-color")
       ccn = request.form.get("ccn")
       cvv = request.form.get("cvv")
+      print(bike_style, gears, tire_size, color)
+
+      con = data.connect()
+      cur = con.cursor()
+      cur.execute("INSERT INTO bikesold (name,type,price,image,description,color,gears,rimsize,customer) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)", (bike_name, bike_style, bike_price, bike_img, bike_desc, color, gears, tire_size, cusr))
+      con.commit()
+      cur.close()
+      con.close()
       return redirect(url_for('renderIndex'))
 
-   con = data.connect()
-   cur = con.cursor()
-   cur.execute("INSERT INTO bikessold (name,type,price,image,description,color,gears,rimsize,customer) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)", ())
 
 if __name__ == '__main__':app.run(debug=True)
