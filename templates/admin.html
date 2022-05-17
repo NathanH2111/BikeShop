@@ -1,93 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link type="text/css" rel="stylesheet" href="{{url_for('static',filename='css/admin.css')}}">
-    <title>Administrator</title>
-</head>
-<body>
-    <navbar>
-        <div id="navbar-container">
-            <img
-                id="navbar-logo"
-                src="static/css/images/logo.svg"
-                alt="Company Logo"
-            />
-            <div id="right-navbar">
-                <a
-                    href="{{ url_for('renderIndex') }}"
-                    class="navbar-item middle-navbar-item"
-                    >Home</a>
-                <a
-                    href="{{url_for('logOut')}}"
-                    class="navbar-item right-navbar-item" style="display:{{logout}}"
-                    >Log Out</a
-                >
-            </div>
-        </div>
-    </navbar>
-    <section id =shop>
-        <div class="shop-container">
-
-            {%for bike in bikes %}
-            <!-- <li><img src="static/uploads/{{bike[3]}}"><br/><div>{{bike[0]}}<br/> Price: $ {{bike[2]}}<br/></div></li> -->
-            <div class="shop-item">
-                <img class="item-img" src="static/uploads/{{bike[3]}}" alt="Bike" />
-                <div class="item-text">
-                    <p class="item-name">{{bike[0]}}</p>
-                    <p class="item-price">${{bike[2]}}</p>
-                    <p class="item-desc">{{bike[4]}}</p>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link type="text/css" rel="stylesheet" href="{{url_for('static',filename='css/admin.css')}}">
+        <title>Administrator</title>
+    </head>
+    <body>
+        <navbar>
+            <div id="navbar-container">
+                <img
+                    id="navbar-logo"
+                    src="static/css/images/logo.svg"
+                    alt="Company Logo"
+                />
+                <div id="right-navbar">
+                    <a
+                        href="{{ url_for('renderIndex') }}"
+                        class="navbar-item middle-navbar-item"
+                        >Home</a>
+                    <a
+                        href="{{url_for('logOut')}}"
+                        class="navbar-item right-navbar-item" style="display:{{logout}}"
+                        >Log Out</a
+                    >
                 </div>
             </div>
-            {%endfor%}
+        </navbar>
+        <section id =shop>
+            <div class="shop-container">
+                {%for bike in bikes %}
+                <div class="shop-item">
+                    <img class="item-img" src="static/uploads/{{bike[3]}}" alt="Bike" />
+                    <div class="item-text">
+                        <p class="item-name">{{bike[0]}}</p>
+                        <p class="item-price">${{bike[2]}}</p>
+                        <p class="item-desc">{{bike[4]}}</p>
+                    </div>
+                </div>
+                {%endfor%}
+            </div>
+        </section>
+        <div id="devider-container">
+            <hr id="devider">
         </div>
-    </section>
-    <div id="devider-container">
-        <hr id="devider">
-    </div>
-    <section class = functions>
-    <section class = upload>
-        <h2>Add Bikes</h2>
-        <form class = newbikes enctype=multipart/form-data action = "{{url_for('addBikes')}}" method = 'POST'>
-            <input type = text name = name placeholder ='Input bike name'>
+        <section class = functions>
+            <section class = upload>
+                <h2>Add Bikes</h2>
+                <form class = newbikes enctype=multipart/form-data action = "{{url_for('addBikes')}}" method = 'POST'>
+                    <input type = text name = name placeholder ='Input bike name'>
+                    <br/>
+                    <select name = type>
+                        <option value ='Mountain'>Mountain</option>
+                        <option value = 'Street'>Street</option>
+                    </select>
+                    <input type="tel" name = price = price placeholder =price>
+                    <br/>
+                    <input maxlength =200 type="text" name ='description' placeholder ='Description max 200 char'>
+                    <label class =custom-file-upload>
+                        Drag Image Here Or Click To Select
+                    <input type = file name = 'file' class = filesupload>
+                    </label>
+                    
+                    <input type="submit" name = add value ='ADD BIKE'>
+                    <h3>{{error}}</h3>
+                </form>
+            </section>
             <br/>
-            <select name = type>
-                <option value ='Mountain'>Mountain</option>
-                <option value = 'Street'>Street</option>
-            </select>
-            <input type="tel" name = price = price placeholder =price>
             <br/>
-            <input maxlength =200 type="text" name ='description' placeholder ='Description max 200 char'>
-            <label class =custom-file-upload>
-                Drag Image Here Or Click To Select
-            <input type = file name = 'file' class = filesupload>
-            </label>
-            
-            <input type="submit" name = add value ='ADD BIKE'>
-            <h3>{{error}}</h3>
-        </form>
-    </section>
-    <br/>
-    <br/>
-    <section class = delete >
-        <h2>Remove Bikes</h2>
-        <form name = 'delete' action="{{url_for('addBikes')}}"   method = 'POST'>
-        <select name = bikes>
-        {%for bike in bikes%}
-            <option value ="{{bike[0]}}">{{bike[0]}}</option>
-        {% endfor %}
-        </select> 
-        <input type="submit" name="delete" value="DELETE BIKE"></input>
-        </form>
-    </section>
-    <section id="footer">
-        <a href="{{ url_for('renderIndex') }}" class="footer-link">Home</a>
-        <a href="{{ url_for('renderShop') }}" class="footer-link">Shop</a>
-        <hr>
-        <p id="copyright-text">Copyright © Bike 2022 All Rights Reserved. If you steal any images or text from our site we will hunt you down and steal your kids.</p>
-    </section>
+            <section class = delete >
+                <h2>Remove Bikes</h2>
+                <form name = 'delete' action="{{url_for('addBikes')}}"   method = 'POST'>
+                    <select name = bikes>
+                    {%for bike in bikes%}
+                        <option value ="{{bike[0]}}">{{bike[0]}}</option>
+                    {% endfor %}
+                    </select> 
+                    <input type="submit" name="delete" value="DELETE BIKE"></input>
+                </form>
+            </section>
+        </section>
+        <section id="footer">
+            <a href="{{ url_for('renderIndex') }}" class="footer-link">Home</a>
+            <a href="{{ url_for('renderShop') }}" class="footer-link">Shop</a>
+            <hr>
+            <p id="copyright-text">Copyright © Bike 2022 All Rights Reserved. If you steal any images or text from our site we will hunt you down and steal your kids.</p>
+        </section>
         <script
             type="module"
             src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
@@ -96,11 +95,9 @@
             nomodule
             src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
         ></script>
-    <script type="text/javascript">
-        if ('{{error}}' != '') {
-    alert('{{error}}');
-}
-    </script>
-</body>
-
+        <script type="text/javascript">
+            if ('{{error}}' != '') {
+            alert('{{error}}');}
+        </script>
+    </body>
 </html>
