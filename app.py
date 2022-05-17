@@ -23,6 +23,16 @@ tmpDta =[]
 
 data.initialInsert() #Initialize DB tables if not exists
 
+
+@app.route("/")
+def renderIndex():
+   if data.check_user(cusr) and not data.check_admin(cusr):
+      return render_template('index.html', admin='none',logout = 'inline')
+   elif data.check_admin(cusr):
+      return render_template('index.html', admin='inline',logout='inline')
+   else:
+      return render_template('index.html', admin='none',logout = 'none')
+
 @app.route("/login")
 def renderLogin():return render_template('login.html',error = '') # render login template
 @app.route('/login',methods = ['POST','GET'])
@@ -191,15 +201,6 @@ def addBikes():
       return redirect(url_for('admin'))
 
    return redirect(url_for('admin'))
-
-@app.route("/")
-def renderIndex():
-   if data.check_user(cusr) and not data.check_admin(cusr):
-      return render_template('index.html', admin='none',logout = 'inline')
-   elif data.check_admin(cusr):
-      return render_template('index.html', admin='inline',logout='inline')
-   else:
-      return render_template('index.html', admin='none',logout = 'none')
 
 @app.route("/register")
 def renderRegister():return render_template('register.html',error = '')
