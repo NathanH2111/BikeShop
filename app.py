@@ -27,11 +27,11 @@ data.initialInsert() #Initialize DB tables if not exists
 @app.route("/")
 def renderIndex():
    if data.check_user(cusr) and not data.check_admin(cusr):
-      return render_template('index.html', admin='none',logout = 'inline')
+      return render_template('index.html', admin='none',logout = 'inline',login='none')
    elif data.check_admin(cusr):
-      return render_template('index.html', admin='inline',logout='inline')
+      return render_template('index.html', admin='inline',logout='inline',login='none')
    else:
-      return render_template('index.html', admin='none',logout = 'none')
+      return render_template('index.html', admin='none',logout = 'none',login='inline')
 
 @app.route("/login")
 def renderLogin():return render_template('login.html',error = '') # render login template
@@ -69,11 +69,11 @@ def renderShop():
    cur.execute("SELECT * FROM bikestock")
    bikes = cur.fetchall()
    if data.check_user(cusr) and not data.check_admin(cusr):
-      return render_template('shop.html',admin='none',logout = 'inline',bikestock = bikes)
+      return render_template('shop.html',admin='none',logout = 'inline',login='none',bikestock = bikes)
    elif data.check_admin(cusr):
-      return render_template('shop.html',admin='inline',logout='inline',bikestock = bikes)
+      return render_template('shop.html',admin='inline',logout='inline',login='none',bikestock = bikes)
    else:
-      return render_template('shop.html',admin='none',logout = 'none',bikestock = bikes)
+      return render_template('shop.html',admin='none',logout = 'none',login='inline',bikestock = bikes)
 
    # if not data.check_user(cusr):return render_template('shop.html',bikestock = bikes,logout = 'hidden',admin='hidden')
    # elif data.check_admin(cusr):return render_template('shop.html',bikestock = bikes,logout = 'hidden',admin='visible')
