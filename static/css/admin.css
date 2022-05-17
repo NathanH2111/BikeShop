@@ -41,6 +41,8 @@ body {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    box-shadow: 2px 2px 5px;
+    background-color: #fff;
 }
 
 .upload form {
@@ -100,6 +102,8 @@ body {
     justify-content: flex-start;
     align-items: center;
     margin: auto;
+    box-shadow: 2px 2px 5px;
+    background-color: #fff;
 }
 
 .delete form {
@@ -125,14 +129,24 @@ body {
 
 /* end of delete form styling */
 
+#devider-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#devider {
+    width: 100%;
+    margin-top: 3vw;
+    margin-bottom: 3vw;
+}
+
 /* puting the add and delete forms in a flex box to get them lined up*/
 .functions {
-    border-top: 5px black solid;
-    margin-top: 5vh;
-    padding-top: 5vh;
     height: 50vh;
     display: flex;
     justify-content: space-between;
+    margin-bottom: 3vw;
 }
 
 /*End of form styling*/
@@ -220,4 +234,33 @@ p.item-desc {
     height: 100%;
     text-align: center;
 
+}
+
+/* *Footer Styling */
+
+#footer {
+    width: 100%;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 1vh;
+}
+
+.footer-link {
+    color: #000000;
+    text-decoration: none;
+    margin-bottom: 1vh;
+}
+
+#footer hr {
+    width: 50vw;
+}
+
+#copyright-text {
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    color:rgba(84, 84, 84, 0.8);
+    font-size: 0.7rem;
 }

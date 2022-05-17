@@ -135,6 +135,7 @@ def renderUsers():
 #render Admin page and pass bike data to the page
 @app.route('/administrator')
 def admin():
+   if not data.check_admin(cusr):return render_template('login.html',error='Please log in before acessing the admin page')
    con = data.connect()
    cur = con.cursor()
    cur.execute('SELECT * FROM bikestock')
