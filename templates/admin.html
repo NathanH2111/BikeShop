@@ -44,41 +44,50 @@
             {%endfor%}
         </div>
     </section>
+    <div id="devider-container">
+        <hr id="devider">
+    </div>
     <section class = functions>
-    <section class = upload>
-        <h2>Add Bikes</h2>
-        <form class = newbikes enctype=multipart/form-data action = "{{url_for('addBikes')}}" method = 'POST'>
-            <input type = text name = name placeholder ='Input bike name'>
-            <br/>
-            <select name = type>
-                <option value ='Mountain'>Mountain</option>
-                <option value = 'Street'>Street</option>
-            </select>
-            <input type="tel" name = price = price placeholder =price>
-            <br/>
-            <input type="text" name ='description' placeholder ='Description'>
-            <label class =custom-file-upload>
-                Drag Image Here Or Click To Select
-            <input type = file name = 'file' class = filesupload>
-            </label>
-            
-            <input type="submit" name = add value ='ADD BIKE'>
-            <h3>{{error}}</h3>
-        </form>
+        <section class = upload>
+            <h2>Add Bikes</h2>
+            <form class = newbikes enctype=multipart/form-data action = "{{url_for('addBikes')}}" method = 'POST'>
+                <input type = text name = name placeholder ='Input bike name'>
+                <br/>
+                <select name = type>
+                    <option value ='Mountain'>Mountain</option>
+                    <option value = 'Street'>Street</option>
+                </select>
+                <input type="tel" name = price = price placeholder =price>
+                <br/>
+                <input type="text" name ='description' placeholder ='Description'>
+                <label class =custom-file-upload>
+                    Drag Image Here Or Click To Select
+                <input type = file name = 'file' class = filesupload>
+                </label>
+                
+                <input type="submit" name = add value ='ADD BIKE'>
+                <h3>{{error}}</h3>
+            </form>
+        </section>
+        <br/>
+        <br/>
+        <section class = delete >
+            <h2>Remove Bikes</h2>
+            <form name = 'delete' action="{{url_for('addBikes')}}"   method = 'POST'>
+                <select name = bikes>
+                {%for bike in bikes%}
+                    <option value ="{{bike[0]}}">{{bike[0]}}</option>
+                {% endfor %}
+                </select> 
+                <input type="submit" name="delete" value="DELETE BIKE"></input>
+            </form>
+        </section>
     </section>
-    <br/>
-    <br/>
-    <section class = delete >
-        <h2>Remove Bikes</h2>
-        <form name = 'delete' action="{{url_for('addBikes')}}"   method = 'POST'>
-        <select name = bikes>
-        {%for bike in bikes%}
-            <option value ="{{bike[0]}}">{{bike[0]}}</option>
-        {% endfor %}
-        </select> 
-        <input type="submit" name="delete" value="DELETE BIKE"></input>
-        </form>
-    </section>
+    <section id="footer">
+        <a href="{{ url_for('renderIndex') }}" class="footer-link">Home</a>
+        <a href="{{ url_for('renderShop') }}" class="footer-link">Shop</a>
+        <hr>
+        <p id="copyright-text">Copyright © Bike 2022 All Rights Reserved. If you steal any images or text from our site we will hunt you down and steal your kids.</p>
     </section>
         <script
             type="module"

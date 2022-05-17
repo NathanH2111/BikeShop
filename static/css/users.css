@@ -70,6 +70,7 @@ navbar {
     width: 100%;
     display: flex;
     justify-content: center;
+    margin-bottom: 3vw;
 }
 
 .shop-container {
@@ -129,4 +130,33 @@ p.item-desc {
 
 #userHeader hr {
     width:50vw;
+}
+
+/* *Footer Styling */
+
+#footer {
+    width: 100%;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 1vh;
+}
+
+.footer-link {
+    color: #000000;
+    text-decoration: none;
+    margin-bottom: 1vh;
+}
+
+#footer hr {
+    width: 50vw;
+}
+
+#copyright-text {
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    color:rgba(84, 84, 84, 0.8);
+    font-size: 0.7rem;
 }

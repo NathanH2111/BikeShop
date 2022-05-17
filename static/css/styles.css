@@ -189,11 +189,13 @@ navbar {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding-top: 1vh;
 }
 
 .footer-link {
     color: #000000;
     text-decoration: none;
+    margin-bottom: 1vh;
 }
 
 #footer hr {
@@ -201,6 +203,8 @@ navbar {
 }
 
 #copyright-text {
+    margin-top: 1vh;
+    margin-bottom: 1vh;
     color:rgba(84, 84, 84, 0.8);
     font-size: 0.7rem;
 }
