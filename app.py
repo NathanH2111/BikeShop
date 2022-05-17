@@ -23,7 +23,6 @@ tmpDta =[]
 
 data.initialInsert() #Initialize DB tables if not exists
 
-
 @app.route("/")
 def renderIndex():
    if data.check_user(cusr) and not data.check_admin(cusr): return render_template('index.html', admin='none',logout = 'inline',login='none')
@@ -68,10 +67,6 @@ def renderShop():
    if data.check_user(cusr) and not data.check_admin(cusr): return render_template('shop.html',admin='none',logout = 'inline',login='none',bikestock = bikes)
    elif data.check_admin(cusr): return render_template('shop.html',admin='inline',logout='inline',login='none',bikestock = bikes)
    else: return render_template('shop.html',admin='none',logout = 'none',login='inline',bikestock = bikes)
-
-   # if not data.check_user(cusr):return render_template('shop.html',bikestock = bikes,logout = 'hidden',admin='hidden')
-   # elif data.check_admin(cusr):return render_template('shop.html',bikestock = bikes,logout = 'hidden',admin='visible')
-   # return render_template('shop.html', bikestock = bikes,logout = 'visible',admin='hidden') # render the shop template
 
 @app.route("/shop", methods = ["GET", "POST"])
 def buyBike():
@@ -212,7 +207,7 @@ def register_register():
       if pwr == None:return render_template('Register.html',error=' please input a password')
 
       if not check:
-         if not  re.match('^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,20}$',pwr):return render_template('Register.html',error = 'Password must be between 8 and 20 characters\n contain upper and lowercase letters and have at least one symbol')
+         if not  re.match('^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,20}$',pwr):return render_template('Register.html',error = 'Password must be between 8 and 20 characters contain upper and lowercase letters and have at least one symbol')
          if mgr == '1':# if the manager checkbox is checked store the registration data in a list and redirect to the admin login page for manager authorization
             global tmpDta
             tmpDta = [eml,data.encrypt_text(adr),bcrypt.hashpw(pwr.encode('utf-8'),bcrypt.gensalt(10))]
