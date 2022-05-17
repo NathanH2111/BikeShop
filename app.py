@@ -26,12 +26,9 @@ data.initialInsert() #Initialize DB tables if not exists
 
 @app.route("/")
 def renderIndex():
-   if data.check_user(cusr) and not data.check_admin(cusr):
-      return render_template('index.html', admin='none',logout = 'inline',login='none')
-   elif data.check_admin(cusr):
-      return render_template('index.html', admin='inline',logout='inline',login='none')
-   else:
-      return render_template('index.html', admin='none',logout = 'none',login='inline')
+   if data.check_user(cusr) and not data.check_admin(cusr): return render_template('index.html', admin='none',logout = 'inline',login='none')
+   elif data.check_admin(cusr): return render_template('index.html', admin='inline',logout='inline',login='none')
+   else: return render_template('index.html', admin='none',logout = 'none',login='inline')
 
 @app.route("/login")
 def renderLogin():return render_template('login.html',error = '') # render login template
@@ -56,11 +53,11 @@ def loginFunc():
    if bcrypt.checkpw(pwr,tmpPwr):
       global cusr
       cusr = int(users[0][3])# save user code for later use
-      if users[0][1] == 'A':return redirect(url_for('admin'))#if user is an admin redirect to admin page
+      if users[0][1] == 'A': return redirect(url_for('admin'))#if user is an admin redirect to admin page
 
-      if users[0][1] == 'U':return redirect(url_for('renderShop',idcode = cusr))#if user is a regular user redirect to the shop
+      if users[0][1] == 'U': return redirect(url_for('renderShop'))#if user is a regular user redirect to the shop
       return render_template('Login.html',error=' oops! An error occured please try to log in again in a few minutes')
-   else:return render_template('Login.html',error='Incorrect Username or Password')# errors
+   else: return render_template('Login.html',error='Incorrect Username or Password')# errors
 
 @app.route("/shop")
 def renderShop():
@@ -68,12 +65,9 @@ def renderShop():
    cur = conn.cursor()
    cur.execute("SELECT * FROM bikestock")
    bikes = cur.fetchall()
-   if data.check_user(cusr) and not data.check_admin(cusr):
-      return render_template('shop.html',admin='none',logout = 'inline',login='none',bikestock = bikes)
-   elif data.check_admin(cusr):
-      return render_template('shop.html',admin='inline',logout='inline',login='none',bikestock = bikes)
-   else:
-      return render_template('shop.html',admin='none',logout = 'none',login='inline',bikestock = bikes)
+   if data.check_user(cusr) and not data.check_admin(cusr): return render_template('shop.html',admin='none',logout = 'inline',login='none',bikestock = bikes)
+   elif data.check_admin(cusr): return render_template('shop.html',admin='inline',logout='inline',login='none',bikestock = bikes)
+   else: return render_template('shop.html',admin='none',logout = 'none',login='inline',bikestock = bikes)
 
    # if not data.check_user(cusr):return render_template('shop.html',bikestock = bikes,logout = 'hidden',admin='hidden')
    # elif data.check_admin(cusr):return render_template('shop.html',bikestock = bikes,logout = 'hidden',admin='visible')
@@ -126,10 +120,8 @@ def renderUsers():
    cur = con.cursor()
    cur.execute("SELECT * FROM bikesold WHERE customer = %s",(cusr,))
    dat = cur.fetchall()
-   if data.check_user(cusr) and not data.check_admin(cusr):
-      return render_template('user.html', bikes=dat ,admin='none',logout = 'inline')
-   elif data.check_admin(cusr):
-      return render_template('user.html', bikes=dat, admin='inline',logout='inline')
+   if data.check_user(cusr) and not data.check_admin(cusr): return render_template('user.html', bikes=dat ,admin='none',logout = 'inline')
+   elif data.check_admin(cusr): return render_template('user.html', bikes=dat, admin='inline',logout='inline')
    else: return render_template('user.html', bikes=dat, admin = "none", logout = "none")
 
 #render Admin page and pass bike data to the page
@@ -142,10 +134,8 @@ def admin():
    dat = cur.fetchall()
    cur.close()
    con.close()
-   if data.check_user(cusr) and not data.check_admin(cusr):
-      return render_template('admin.html', bikes = dat, idcode = cusr, admin='none', logout = 'inline')
-   elif data.check_admin(cusr):
-      return render_template('admin.html', bikes = dat, idcode = cusr, admin='inline', logout='inline')
+   if data.check_user(cusr) and not data.check_admin(cusr):return render_template('admin.html', bikes = dat, idcode = cusr, admin='none', logout = 'inline')
+   elif data.check_admin(cusr):return render_template('admin.html', bikes = dat, idcode = cusr, admin='inline', logout='inline')
    else: return render_template('admin.html',bikes = dat, idcode=cusr, error = '', admin = "none", logout = "none")
 
 @app.route('/administrator',methods=['POST','GET'])
@@ -222,7 +212,7 @@ def register_register():
       if pwr == None:return render_template('Register.html',error=' please input a password')
 
       if not check:
-         if  re.match('/^(?=.*\d).{8,}$/',pwr):return render_template('Register.html',error = ' password not strong enough')
+         if not  re.match('^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,20}$',pwr):return render_template('Register.html',error = 'Password must be between 8 and 20 characters\n contain upper and lowercase letters and have at least one symbol')
          if mgr == '1':# if the manager checkbox is checked store the registration data in a list and redirect to the admin login page for manager authorization
             global tmpDta
             tmpDta = [eml,data.encrypt_text(adr),bcrypt.hashpw(pwr.encode('utf-8'),bcrypt.gensalt(10))]
