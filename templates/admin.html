@@ -49,7 +49,7 @@
             <section class = upload>
                 <h2>Add Bikes</h2>
                 <form class = newbikes enctype=multipart/form-data action = "{{url_for('addBikes')}}" method = 'POST'>
-                    <input type = text name = name placeholder ='Input bike name'>
+                    <input maxlength="70" type = text name = name placeholder ='Input bike name'>
                     <br/>
                     <select name = type>
                         <option value ='Mountain'>Mountain</option>
