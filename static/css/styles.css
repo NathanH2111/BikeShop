@@ -186,10 +186,21 @@ navbar {
     width: 100%;
     background-color: #fff;
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
 
 .footer-link {
     color: #000000;
     text-decoration: none;
+}
+
+#footer hr {
+    width: 50vw;
+}
+
+#copyright-text {
+    color:rgba(84, 84, 84, 0.8);
+    font-size: 0.7rem;
 }
