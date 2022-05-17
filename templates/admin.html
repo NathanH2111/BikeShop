@@ -48,40 +48,39 @@
         <hr id="devider">
     </div>
     <section class = functions>
-        <section class = upload>
-            <h2>Add Bikes</h2>
-            <form class = newbikes enctype=multipart/form-data action = "{{url_for('addBikes')}}" method = 'POST'>
-                <input type = text name = name placeholder ='Input bike name'>
-                <br/>
-                <select name = type>
-                    <option value ='Mountain'>Mountain</option>
-                    <option value = 'Street'>Street</option>
-                </select>
-                <input type="tel" name = price = price placeholder =price>
-                <br/>
-                <input type="text" name ='description' placeholder ='Description'>
-                <label class =custom-file-upload>
-                    Drag Image Here Or Click To Select
-                <input type = file name = 'file' class = filesupload>
-                </label>
-                
-                <input type="submit" name = add value ='ADD BIKE'>
-                <h3>{{error}}</h3>
-            </form>
-        </section>
-        <br/>
-        <br/>
-        <section class = delete >
-            <h2>Remove Bikes</h2>
-            <form name = 'delete' action="{{url_for('addBikes')}}"   method = 'POST'>
-                <select name = bikes>
-                {%for bike in bikes%}
-                    <option value ="{{bike[0]}}">{{bike[0]}}</option>
-                {% endfor %}
-                </select> 
-                <input type="submit" name="delete" value="DELETE BIKE"></input>
-            </form>
-        </section>
+    <section class = upload>
+        <h2>Add Bikes</h2>
+        <form class = newbikes enctype=multipart/form-data action = "{{url_for('addBikes')}}" method = 'POST'>
+            <input type = text name = name placeholder ='Input bike name'>
+            <br/>
+            <select name = type>
+                <option value ='Mountain'>Mountain</option>
+                <option value = 'Street'>Street</option>
+            </select>
+            <input type="tel" name = price = price placeholder =price>
+            <br/>
+            <input maxlength =200 type="text" name ='description' placeholder ='Description max 200 char'>
+            <label class =custom-file-upload>
+                Drag Image Here Or Click To Select
+            <input type = file name = 'file' class = filesupload>
+            </label>
+            
+            <input type="submit" name = add value ='ADD BIKE'>
+            <h3>{{error}}</h3>
+        </form>
+    </section>
+    <br/>
+    <br/>
+    <section class = delete >
+        <h2>Remove Bikes</h2>
+        <form name = 'delete' action="{{url_for('addBikes')}}"   method = 'POST'>
+        <select name = bikes>
+        {%for bike in bikes%}
+            <option value ="{{bike[0]}}">{{bike[0]}}</option>
+        {% endfor %}
+        </select> 
+        <input type="submit" name="delete" value="DELETE BIKE"></input>
+        </form>
     </section>
     <section id="footer">
         <a href="{{ url_for('renderIndex') }}" class="footer-link">Home</a>

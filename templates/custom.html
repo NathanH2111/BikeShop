@@ -61,12 +61,12 @@
                 id="custom-form"
             >
                 <label for="type">bike type</label>
-                <select name="type" id="bike-type">
+                <select name="type" id="bike-type" required>
                     <option value="mountain">Mountain Bike</option>
                     <option value="street">Street Bike</option>
                 </select>
                 <label for="gears">gears</label>
-                <select name="gears" id="gears">
+                <select name="gears" id="gears" required>
                     <option value="1">1</option>
                     <option value="3">3</option>
                     <option value="16">18</option>
@@ -76,7 +76,7 @@
                     <option value="69">69</option>
                 </select>
                 <label for="tire-size">Tire Size</label>
-                <select name="tire-size" id="tire-size">
+                <select name="tire-size" id="tire-size" required>
                     <option value="16">16</option>
                     <option value="20">20</option>
                     <option value="24">24</option>
@@ -88,7 +88,7 @@
                     <option value="420">420</option>
                 </select>
                 <label for="bike-color">color</label>
-                <input type="color" name="bike-color" id="bike-color" />
+                <input type="color" name="bike-color" id="bike-color" required />
                 <input
                     class="card_Num"
                     type="text"
@@ -96,9 +96,10 @@
                     name="ccn"
                     id="ccn"
                     placeholder="Card Number"
+                    required
                 />
-                <input type="tel" maxlength="3" name="cvv" placeholder="CVV" />
-                <input type="submit" value="Submit" />
+                <input type="tel" min="3" maxlength="3" name="cvv" placeholder="CVV" required />
+                <input type="submit" value="Submit" required />
             </form>
         </section>
         <section id="footer">
