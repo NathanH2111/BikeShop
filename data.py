@@ -35,6 +35,7 @@ def check_user(num):
     print(data)
     for i in range(len(data)):
         if data[i][0] == num:
+            print(data[i][0])
             return True
     return False
 

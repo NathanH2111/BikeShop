@@ -100,7 +100,17 @@ navbar {
     width: 100%;
     margin-top: 1vw;
 }
+.item-text input {
+    text-align: center;
+    color:#000000;
+    font-size: x-large;
+    border  : none;
+    padding : 0 10px;
+    margin  : 0;
+    width   : 240px;
+    background: none;
 
+}
 p.item-desc {
     word-wrap: break-word;
     width: 80%;

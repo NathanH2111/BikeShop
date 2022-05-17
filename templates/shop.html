@@ -40,25 +40,25 @@
                         class="navbar-item right-navbar-item"
                         >Sign Up</a
                     >
-                       <a
+                    <a
 						href="{{ url_for('renderUsers') }}"
 						class="navbar-item right-navbar-item"
-                        style="display:{{logout}}"
+                        style="display:'{{logout}}'"
 					>My Bikes</a>
                     <a
 						href="{{ url_for('admin') }}"
 						class="navbar-item right-navbar-item"
-                        style="display:{{admin}}">Admin</a>
+                        style="display:'{{admin}}'">Admin</a>
                     <a
                         href="{{url_for('logOut')}}"
-                        class="navbar-item right-navbar-item" style="display:{{logout}}"
+                        class="navbar-item right-navbar-item" style="display:'{{logout}}'"
                         >Log Out</a
                     >
                 </div>
             </div>
         </navbar>
 		<section id="shop-header">
-			<h1>Shop</h1>
+			<h1>BIKEY</h1>
 			<hr />
 		</section>
 		<section id="shop">
@@ -69,7 +69,8 @@
 						<img class="item-img" src="static/uploads/{{item[3]}}" alt="Bike" />
 						<div class="item-text">
 							<input name="item-name" type="text" class="item-name" placeholder="{{item[0]}}" value="{{item[0]}}" disabled readonly></input>
-							<input name="item-price" type="text" class="item-price" placeholder="{{item[2]}}" value="{{item[2]}}"disabled readonly></input>
+                            
+							<input name="item-price" type="text" class="item-price" placeholder="{{item[2]}}" value="$ {{item[2]}}"disabled readonly></input>
 							<p class="item-desc">{{item[4]}}</p>
 						</div>
                         <div class="item-btn">

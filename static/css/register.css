@@ -141,36 +141,38 @@ button {
 /* *Navbar Styling */
 
 navbar {
+    font-size: medium;
     width: 100%;
     margin-bottom: 5vw;
 }
 
 #navbar-logo {
-    margin-left: 2%;
     width: 3vw;
 }
 
-#right-navbar {
+#middle-navbar {
+    width: 10%;
     display: flex;
-    justify-content: space-between;
-    margin-right: 2%;
-    /* width: 20%; */
+    justify-content: space-around;
+}
+
+#right-navbar {
+    width: 10%;
+    display: flex;
+    justify-content: space-around;
 }
 
 #navbar-container {
-    background-color: #ffffff;
+    background-color: #f5f5f5;
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
 }
 
 .navbar-item {
-    margin-left: 2vw;
     color: #000000;
     float: left;
     text-decoration: none;
 }
-
 
 /* *End Navbar Styling */
