@@ -209,9 +209,9 @@ def renderUsers():
    cur.execute("SELECT * FROM bikesold WHERE customer = %s",(cusr,))
    dat = cur.fetchall()
    if data.check_user(cusr) and not data.check_admin(cusr):
-      return render_template('user.html',admin='none',logout = 'inline')
+      return render_template('user.html', bikes=dat ,admin='none',logout = 'inline')
    elif data.check_admin(cusr):
-      return render_template('user.html',admin='inline',logout='inline')
+      return render_template('user.html', bikes=dat, admin='inline',logout='inline')
    else: return render_template('user.html', bikes=dat, admin = "none", logout = "none")
 
 @app.route("/logout")#clear the cusr variable and redirect to the login page
