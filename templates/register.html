@@ -37,7 +37,6 @@
                         class="navbar-item right-navbar-item"
                         >Login</a
                     >
-
                 </div>
             </div>
         </navbar>
@@ -45,7 +44,7 @@
             <form
                 class="form1"
                 method="post"
-                action="http://localhost:5000/register"
+                action="{{ url_for('register_register') }}"
                 id="rgstr"
             >
                 <h1>Register</h1>
@@ -73,11 +72,12 @@
                 <p id="password-strength-text"></p>
                 <br />
                 <button type="submit" value="'submit">Register</button>
-                <h3>{{error}}</h3>
                 <a href="http://localhost:5000/login">Already a user? log in</a>
             </form>
+            <div id="error-container">
+                <h3 id="error">{{error}}</h3>
+            </div>
         </div>
-
         <script
             type="text/javascript"
             src="{{url_for('static',filename='js/reg.js')}}"

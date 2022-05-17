@@ -31,16 +31,10 @@ meter::-webkit-meter-bar {
 
 meter {
     /* Reset the default appearance */
-    /* -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none; */
-
     margin: 0 auto 1em;
-    width: 100%;
+    width: 50%;
     height: 5vh;
     /* Applicable only to Firefox */
-    /* background: none;
-    background-color: rgba(0, 0, 0, 0.1); */
 }
 
 /* Webkit based browsers */
@@ -112,7 +106,8 @@ form {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    margin: auto;
+    align-items: center;
+    /* margin: auto; */
 }
 input {
     font-size: large;
@@ -126,7 +121,7 @@ h1 {
 }
 
 button {
-    margin: auto;
+    /* margin: auto; */
     width: 60%;
     height: 8vh;
 }
@@ -142,6 +137,17 @@ button {
     justify-content: space-around;
     text-align: center;
 }
+
+#error-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#error {
+    width: 50%;
+}
+
 /* *Navbar Styling */
 
 navbar {
