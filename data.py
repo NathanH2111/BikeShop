@@ -1,7 +1,6 @@
 from cryptography.fernet import Fernet
 import psycopg2
 import bcrypt
-import random
 def connect(): return psycopg2.connect(
     database = 'flask_db',
     user = 'postgres',
