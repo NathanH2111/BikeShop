@@ -55,8 +55,8 @@ def loginFunc():
       if users[0][1] == 'A': return redirect(url_for('admin'))#if user is an admin redirect to admin page
 
       if users[0][1] == 'U': return redirect(url_for('renderShop'))#if user is a regular user redirect to the shop
-      return render_template('Login.html',error=' oops! An error occured please try to log in again in a few minutes')
-   else: return render_template('Login.html',error='Incorrect Username or Password')# errors
+      return render_template('Login.html',error='ERROR:  oops! An error occured please try to log in again in a few minutes')
+   else: return render_template('Login.html',error='ERROR: Incorrect Username or Password')# errors
 
 @app.route("/shop")
 def renderShop():
@@ -86,7 +86,7 @@ def buyBike():
 
 @app.route("/custom")
 def renderCustom():
-   if not data.check_user(cusr): return render_template('login.html',error='Please log in before purchasing a bike')
+   if not data.check_user(cusr): return render_template('login.html',error='ERROR: Please log in before purchasing a bike')
    return render_template('custom.html')
 
 @app.route("/custom", methods=["GET", "POST"])
@@ -110,7 +110,7 @@ def purchaseBike():
 
 @app.route("/users")
 def renderUsers():
-   if not data.check_user(cusr):return render_template('login.html',error='Please log in to continue to Your Bikes')
+   if not data.check_user(cusr):return render_template('login.html',error='ERROR: Please log in to continue to Your Bikes')
    con = data.connect()
    cur = con.cursor()
    cur.execute("SELECT * FROM bikesold WHERE customer = %s",(cusr,))
@@ -135,15 +135,18 @@ def admin():
 
 @app.route('/administrator',methods=['POST','GET'])
 def addBikes():
-   if not data.check_admin(cusr):return render_template('login.html',error='Please Log in To your Account')
+   if not data.check_admin(cusr):return render_template('login.html',error='ERROR: Please Log in To your Account')
    # Proccess input from the add bikes form
    if 'add' in request.form:
       name = request.form.get('name')
       type = request.form.get('type')
       desc = request.form.get('description')
-      price = float(request.form.get('price'))
+      price = request.form.get('price')
+      print(price)
+      if price == '' or desc  == '' or name == '':return render_template('admin.html',error='ERROR: Missing one or more required inputs')
+      price = float(price)
       if 'file' not in request.files:
-         return render_template('admin.html')
+         return render_template('admin.html',error='ERROR: no file uploaded')
       file = request.files['file']
       if file.filename == '':
          con = data.connect()
@@ -152,7 +155,7 @@ def addBikes():
          dat = cur.fetchall()
          cur.close()
          con.close()
-         return render_template('admin.html',bikes=dat,error='No filename',idcode =cusr)
+         return render_template('admin.html',bikes=dat,error='ERROR: No filename',idcode =cusr)
       if file and allowed_file(file.filename):
          filename = secure_filename(file.filename)
          file.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
