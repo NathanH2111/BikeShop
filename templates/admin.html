@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <link type="text/css" rel="stylesheet" href="{{url_for('static',filename='css/admin.css')}}">
         <title>Administrator</title>
     </head>
@@ -55,7 +56,7 @@
                         <option value ='Mountain'>Mountain</option>
                         <option value = 'Street'>Street</option>
                     </select>
-                    <input type="number" name = price = price placeholder =price>
+                    <input type="text" class="numbersOnly" name = price = price placeholder =price>
                     <br/>
                     <input maxlength =200 type="text" name ='description' placeholder ='Description max 200 char'>
                     <label class =custom-file-upload>
@@ -96,8 +97,14 @@
             src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
         ></script>
         <script type="text/javascript">
-            if ('{{error}}' != '') {
-            alert('{{error}}');}
+            $(document).ready(function () {
+     if ('{{error}}' != '') {
+         alert('{{error}}');
+     }
+});
+        </script>
+        <script type="text/javascript" src ="{{ url_for('static',filename='js/admin.js') }}"></script>
+           
         </script>
     </body>
 </html>
