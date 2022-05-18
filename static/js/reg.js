@@ -1,4 +1,10 @@
 $(document).ready(function () {
+      $('body').on('contextmenu', function (e) {
+          return false;
+      });
+     $('body').bind('cut copy', function (e) {
+         e.preventDefault();
+     });
     var strength = {
         0: 'Worst',
         1: 'Bad',
@@ -25,18 +31,21 @@ $(document).ready(function () {
     });
     $form = $('#rgstr'); // cache
     $form.find(':input[type="submit"]').prop('disabled', true); // disable submit btn
-    $form.find(':input').change(function () {
-        // monitor all inputs for changes
-        var disable = false;
-        $form
-            .find(':input')
-            .not('[type="submit"]')
-            .each(function (i, el) {
-                // test all inputs for values
-                if ($.trim(el.value) === '') {
-                    disable = true; // disable submit if any of them are still blank
-                }
-            });
-        $form.find(':input[type="submit"]').prop('disabled', disable);
-    });
+        $form.find(':input[type="submit"]').prop('disabled', true); // disable submit btn
+        $('input').keyup(function () {
+            if (
+                $('#eml').val().trim() != '' && $('#adr').val().trim() != '' && $('#password').val().trim() != ''
+            ) {
+                console.log('fields filled');
+                console.log($('#ccn').length, $('#cvv').length);
+                $form.find(':input[type="submit"]').prop('disabled', false);
+            }
+        });
+        $('input').keydown(function () {
+            if ($('#eml').val().trim() == '' || $('#adr').val().trim() == '' || $('#password').val().trim() == '') {
+                console.log('some fields are empty!');
+                console.log($('#ccn').length, $('#cvv').length);
+                $form.find(':input[type="submit"]').prop('disabled', true);
+            }
+        });
 });
